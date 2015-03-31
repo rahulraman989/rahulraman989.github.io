@@ -13,5 +13,6 @@ function validateForm() {
 		else {
 			return true;
 		}
+		return true;
 		} 
 </script>
