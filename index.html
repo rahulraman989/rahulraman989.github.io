@@ -2,17 +2,18 @@
 <html>
 <head>
 	<h1> This is a test site for testing out various aspects of analytics implementation!! </h1>
+	<script src = "rahulraman989.github.io/js/formvalidator.js"> </script>
 </head>
 <body>
-	<form id='sampleform' method='post' action='http://rahulraman989.github.io/checkout.html' >
+	<form id='sampleform' method='post' action='http://rahulraman989.github.io/checkout.html' onsubmit= 'return validateForm();'>
 	   <p>
-	   Name: <input type='text' name='Name' />
+	   Name: <input type='text' id= 'full_name' name='Name' />
 	   </p>
 	   <p>
-	   Email: <input type='text' name='Email' />
+	   Email: <input type='text' id = 'email_id' name='Email' />
 	   </p>
 	    <p>
-	   <input type="checkbox" name="subscribe" checked />Subscribe to the News Letter
+	   <input type="checkbox" id = 'newsletter_subscription 'name="subscribe" />Subscribe to the News Letter
 	   </p>
 	   <p>
 	    Format of the Email:
