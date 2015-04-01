@@ -7,7 +7,7 @@
 	mixpanel.init("67e0ef4e462dd94662870e208cd5b361");</script><!-- end Mixpanel -->
 </head>
 <body>
-	<form id='sampleform' action='http://rahulraman989.github.io/checkout.html'>
+	<form id='form_personal_details' action='http://rahulraman989.github.io/checkout.html'>
 	   <p>
 	   Name: <input type='text' id= 'full_name' name='Name' />
 	   </p>
@@ -15,7 +15,7 @@
 	   Email: <input type='text' id = 'email_id' name='Email' />
 	   </p>
 	    <p>
-	   <input type="checkbox" id = 'newsletter_subscription 'name="subscribe" />Subscribe to the News Letter
+	   <input type="checkbox" id = 'newsletter_subscription' name="subscribe" />Subscribe to the News Letter
 	   </p>
 	   <p>
 	    Format of the Email:
@@ -30,8 +30,18 @@
 	   <input type='submit' name='Submit' value='Submit' />
 	   </p>
 	   <script>
-		var name = document.getElementById("full_name").value;
-	   alert (name);
+		var fullname = document.getElementById("full_name").value;
+		var email = document.getElementById("email_id").value;
+		var newsletter = document.getElementById("newsletter_subscription").value;
+		var html = document.getElementById("format_html").value;
+		var plainText = document.getElementById("format_text").value;
+	    
+        mixpanel.track_forms("#form_personal_details", "submit personal details", {
+            "Name": fullname,
+			"Email" : email,
+			"Newletter Subscription" : newsletter,
+			"email format" : html
+        });
 	   </script>
 	</form>
 
