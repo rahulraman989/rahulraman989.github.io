@@ -7,7 +7,7 @@
 	mixpanel.init("67e0ef4e462dd94662870e208cd5b361");</script><!-- end Mixpanel -->
 </head>
 <body>
-	<form id='form_personal_details' action='http://rahulraman989.github.io/checkout.html'>
+	<form id='form_personal_details' method = "POST" action='http://rahulraman989.github.io/checkout.html'>
 	   <p>
 	   Name: <input type='text' id = 'full_name' name='Name' />
 	   </p>
@@ -39,8 +39,8 @@
  
      mixpanel.track_forms("#form_personal_details", "submit personal details", {
 		 "referrer": document.referrer,
-         "$Name": fullname,
-		"$Email" : email,
+         "Name": fullname,
+		"Email" : email,
 		"Newletter Subscription" : newsletter,
 		"email format" : html
      });
