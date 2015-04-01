@@ -9,7 +9,7 @@
 <body>
 	<form id='form_personal_details' action='http://rahulraman989.github.io/checkout.html'>
 	   <p>
-	   Name: <input type='text' id= 'full_name' name='Name' />
+	   Name: <input type='text' id = 'full_name' name='Name' />
 	   </p>
 	   <p>
 	   Email: <input type='text' id = 'email_id' name='Email' />
@@ -29,21 +29,11 @@
 	   <p>
 	   <input type='submit' name='Submit' value='Submit' />
 	   </p>
-	   <script>
-		var fullname = document.getElementById("full_name").value;
-		var email = document.getElementById("email_id").value;
-		var newsletter = document.getElementById("newsletter_subscription").value;
-		var html = document.getElementById("format_html").value;
-		var plainText = document.getElementById("format_text").value;
-    
-	     mixpanel.track_forms("#form_personal_details", "submit personal details", {
-			 "referrer": document.referrer,
-	         "Name": fullname,
-			"Email" : email,
-			"Newletter Subscription" : newsletter,
-			"email format" : html
-	     });
-	   </script>
 	</form>
+   <script> 
+     mixpanel.track_forms("#form_personal_details", "submit personal details", {
+		 "referrer": document.referrer
+     });
+   </script>
 </body>
 </html>
