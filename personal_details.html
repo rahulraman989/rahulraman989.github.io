@@ -20,15 +20,19 @@
 	   <p>
 	    Format of the Email:
 	       <p>
-	       <input type="radio" name="format" value="html" checked='checked' />HTML
+	       <input type="radio" id = "format_html" name="format" value="html" checked='checked' />HTML
 	       </p>
 	       <p>
-	       <input type="radio" name="format" value="text" />Plain Text
+	       <input type="radio" id = "format_text" name="format" value="text" />Plain Text
 	       </p>
 	   </p>
 	   <p>
 	   <input type='submit' name='Submit' value='Submit' />
 	   </p>
+	   <script>
+	   var name = $("#full_name").value;
+	   alert (name);
+	   </script>
 	</form>
 </body>
 </html>
