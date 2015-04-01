@@ -27,9 +27,25 @@
 	       </p>
 	   </p>
 	   <p>
-	   <input type='submit' name='Submit' value='Submit' />
+	   <input type='submit' name='Submit' value='Submit' onclick="processFormData();" />
 	   </p>
 	</form>
+	<script>
+		var fullname = document.getElementById("full_name").value;
+		var email = document.getElementById("email_id").value;
+		var newsletter = document.getElementById("newsletter_subscription").value;
+		var html = document.getElementById("format_html").value;
+		var plainText = document.getElementById("format_text").value;
+		
+		function processFormData() {
+	        mixpanel.track_forms("#form_personal_details", "submit personal details", {
+	   		 "referrer": document.referrer,
+			 "name" : fullname,
+			 "email" : email,
+			 "newsletter" : newsletter
+	        });
+		}
+		</script>
    <script>
      mixpanel.track_forms("#form_personal_details", "submit personal details", {
 		 "referrer": document.referrer
