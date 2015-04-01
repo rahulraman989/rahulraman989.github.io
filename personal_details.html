@@ -39,10 +39,10 @@
 	var plainText = document.getElementById("format_text").value;
     
      mixpanel.track_forms("#form_personal_details", "submit personal details", {
-		 "referrer": document.referrer
-         "Name": fullname
-		"Email" : email
-		"Newletter Subscription" : newsletter
+		 "referrer": document.referrer,
+         "Name": fullname,
+		"Email" : email,
+		"Newletter Subscription" : newsletter,
 		"email format" : html
      });
    </script>
