@@ -17,6 +17,14 @@
 	<script src="//assets.adobedtm.com/a166d3c24a3449f554012794905f271334abfbfc/satelliteLib-6b5ea8f11fdb673ce3e116e03c72b790d4937fcb-staging.js"></script>
 </head>
 <body>
+	<script>
+	function myFunction() {
+         adobedata.push({'eventtype': 'pdfdownload',
+		                 'eventvalue' : 'sample.pdf'
+	});
+	alert("Values set");
+	}
+	</script>
 	
 	
 	
@@ -36,9 +44,7 @@
 	   Email: <input type='text' id = 'email_id' name='Email' />
 	   </p>
 	    <p>
-	   <input type="checkbox" id = 'newsletter_subscription' name="subscribe"  onclick = "adobedata.push({'eventtype': 'pdfdownload',
-		                 'eventvalue' : 'sample.pdf'
-	});" />Subscribe to the News Letter
+	   <input type="checkbox" id = 'newsletter_subscription' name="subscribe"  onclick = "myFunction()" />Subscribe to the News Letter
 	   </p>
 	   <p>
 	    Format of the Email:
