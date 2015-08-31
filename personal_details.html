@@ -18,15 +18,7 @@
 </head>
 <body>
 	
-	<script>
-	function fn_eventcall()
-	{
-		adobedata.push({'eventtype': 'pdfdownload',
-		                 'eventvalue' : 'sample.pdf'
-	});
-	}
 	
-	</script>
 	
 	<!-- Google Tag Manager -->
 	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KF5F7W"
@@ -56,7 +48,9 @@
 	       </p>
 	   </p>
 	   <p>
-	   <input type='submit' name='Submit' value='Submit'  onclick = "fn_eventcall()" />
+	   <input type='submit' name='Submit' value='Submit'  onclick = "adobedata.push({'eventtype': 'pdfdownload',
+		                 'eventvalue' : 'sample.pdf'
+	});" />
 	   </p>
 	</form>
    <script>
