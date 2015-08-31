@@ -17,6 +17,17 @@
 	<script src="//assets.adobedtm.com/a166d3c24a3449f554012794905f271334abfbfc/satelliteLib-6b5ea8f11fdb673ce3e116e03c72b790d4937fcb-staging.js"></script>
 </head>
 <body>
+	
+	<script>
+	fn_eventcall()
+	{
+		adobedata.push({'eventtype': 'pdfdownload',
+		                 'eventvalue' = 'sample.pdf'
+	});
+	}
+	
+	</script>
+	
 	<!-- Google Tag Manager -->
 	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KF5F7W"
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -45,7 +56,7 @@
 	       </p>
 	   </p>
 	   <p>
-	   <input type='submit' name='Submit' value='Submit' />
+	   <input type='submit' name='Submit' value='Submit'  onclick = "fn_eventcall()" />
 	   </p>
 	</form>
    <script>
