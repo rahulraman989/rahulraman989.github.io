@@ -22,7 +22,12 @@
 	function myFunction() {
 		adobedata.eventtype = "pdfdownload";
 		adobedata.eventvalue = "sample.pdf";
-	    alert("Values set");
+	    
+	}
+	
+	function myFunction1(){
+		adobedata.eventtype = "external";
+		adobedata.eventvalue = "www.facebook.com";
 	}
 	</script>
 	
@@ -49,7 +54,7 @@
 	   <p>
 	    Format of the Email:
 	       <p>
-	       <input type="radio" id = "format_html" name="format" value="html" checked='checked' />HTML
+	       <input type="radio" id = "format_html" name="format" value="html" onclick = "myFunction1()" checked='checked' />HTML
 	       </p>
 	       <p>
 	       <input type="radio" id = "format_text" name="format" value="text" />Plain Text
