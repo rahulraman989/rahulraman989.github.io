@@ -29,6 +29,11 @@
 		adobedata.eventtype = "external";
 		adobedata.eventvalue = "www.facebook.com";
 	}
+	
+	function myFunction2(){
+		adobedata.eventtype = "pdfdownload";
+		adobedata.eventvalue = "internal.pdf";
+	}
 	</script>
 	
 	
@@ -57,7 +62,7 @@
 	       <input type="radio" id = "format_html" name="format" value="html" onclick = "myFunction1()" checked='checked' />HTML
 	       </p>
 	       <p>
-	       <input type="radio" id = "format_text" name="format" value="text"  onclick = "myFunction()" />Plain Text
+	       <input type="radio" id = "format_text" name="format" value="text"  onclick = "myFunction2()" />Plain Text
 	       </p>
 	   </p>
 	   <p>
