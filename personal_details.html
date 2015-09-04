@@ -76,7 +76,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	       </p>
 	   </p>
 	   <p>
-	   <input type='submit' name='Submit' value='Submit'/>
+	   <input type='submit' name='Submit' value='Submit' onclick="dataLayer.push({
+	   'event' : 'trackForm',
+	   'eventCategory' : 'Form',
+	   'eventAction' : 'Submit'});" />
 	   </p>
 	</form>
    <script>
