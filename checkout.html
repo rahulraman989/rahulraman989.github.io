@@ -31,12 +31,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			What is the subscription you prefer ? Tell me 
 			<p>
 				<select name="type">
-					<option value="standard" onclick="dataLayer.push({
-	   'event' : 'trackSub',
-	   'dimvalue' : 'Standard-Free'});" >Standard - Free</option>
-					<option value="prof"onclick="dataLayer.push({
-	   'event' : 'trackSub',
-	   'dimvalue' : 'Professional'});" >Professional - Paid</option>
+					<option value="standard" >Standard - Free</option>
+					<option value="prof" >Professional - Paid</option>
 					</select>
 					</p>
 					</p>
@@ -45,7 +41,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						<textarea name="comments" rows="7" cols="30"></textarea>
 					</p>
 			 	   <p>
-			 	   <input type='submit' name='Submit' value='Submit' />
+			 	   <input type='submit' name='Submit' value='Submit' onclick="dataLayer.push({
+	   'event' : 'trackSub',
+	   'dimvalue' : 'Professional'});" />
 			 	   </p>
 				</form>
 				<script type="text/javascript">_satellite.pageBottom();</script>
