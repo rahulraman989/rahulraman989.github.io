@@ -31,8 +31,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			What is the subscription you prefer ? Tell me 
 			<p>
 				<select name="type">
-					<option value="standard">Standard - Free</option>
-					<option value="prof">Professional - Paid</option>
+					<option value="standard" onclick="dataLayer.push({
+	   'event' : 'trackSub',
+	   'eventCategory' : 'subType',
+	   'eventAction' : 'Standard-Free'});" >Standard - Free</option>
+					<option value="prof"onclick="dataLayer.push({
+	   'event' : 'trackSub',
+	   'eventCategory' : 'subType',
+	   'eventAction' : 'Professional'});" >Professional - Paid</option>
 					</select>
 					</p>
 					</p>
