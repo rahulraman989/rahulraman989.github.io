@@ -114,7 +114,7 @@ function initLocalTrack(){
     	var trackers = ga.getAll();
 		var i, len;
 		for (i = 0, len = trackers.length; i < len; i += 1) {
-			if (trackers[i].get('trackingId') ==="UA-46697978-1") {
+			if (trackers[i].get('trackingId') ==="UA-46697978-2") {
 				gaCliendId  = trackers[i].get('clientId');
 				}
 			}
