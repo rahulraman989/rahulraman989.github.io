@@ -88,7 +88,7 @@ function uniqId() {
 }
 function appendUbToBtn(){
 	if($.cookie('_ub')){
-		ubparam = '&_ub='+$.cookie('_ub');
+		ubparam = '_ub='+$.cookie('_ub');
 		}
 	else{
 		ubparam = '';
