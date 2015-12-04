@@ -176,8 +176,7 @@ function insertPageLoadTrk(){
 	lgitem._qs = getUrlParams();
 	var c = getUrlParamVal('camp_id');
 	lgitem._camp_id = c == undefined?'':c;
-	var lgitemstr = JSON.stringify(lgitem);
-	   lgitem._scn = schn;
+	lgitem._scn = schn;
 	   lgitem._chn = chn;
 	   lgitem._cid = cmpid;
 	   lgitem._csc = itmobj['S'];
@@ -189,6 +188,7 @@ function insertPageLoadTrk(){
 	   lgitem._cmcid = itmobj['I'];
 	   lgitem._cmc = itmobj['R'];
 	   lgitem._cmmc = mkt;
+	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
