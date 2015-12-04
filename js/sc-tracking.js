@@ -23,10 +23,118 @@ var n=t[_0x6db5[4]](_0x6db5[3]);
 	var schn = schnar[itmobj['B']] == undefined ? itmobj['B'] : schnar[itmobj['B']];
 	var chn = chnar[itmobj['C']] == undefined ? itmobj['C'] : chnar[itmobj['C']];
 	var mkt = mktar[itmobj['M']] == undefined ? itmobj['M'] : mktar[itmobj['M']];
+//Genenric code for Base 32 encoding 
+(function(exports) {
+                var base32 = {
+                    a: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                    pad: "=",
+                    encode: function (s) {
+                        var a = this.a;
+                        var pad = this.pad;
+                        var len = s.length;
+                        var o = "";
+                        var w, c, r=0, sh=0;
+                        for(i=0; i<len; i+=5) {
+                            // mask top 5 bits
+                            c = s.charCodeAt(i);
+                            w = 0xf8 & c;
+                            o += a.charAt(w>>3);
+                            r = 0x07 & c;
+                            sh = 2;
 
-// Generic code for Base 32 encoding 
-!function(){function t(){var t=0,e=0;this.output="",this.readByte=function(r){return"string"==typeof r&&(r=r.charCodeAt(0)),0>t?e|=r>>-t:e=r<<t&248,t>3?(t-=8,1):(4>t&&(this.output+=i[e>>3],t+=5),0)},this.finish=function(r){var n=this.output+(0>t?i[e>>3]:"")+(r?"$":"");return this.output="",n}}function e(){var t=0,e=0;this.output="",this.readChar=function(r){"string"!=typeof r&&"number"==typeof r&&(r=String.fromCharCode(r)),r=r.toLowerCase();var n=s()[r];"undefined"!=typeof n&&(n<<=3,e|=n>>>t,t+=5,t>=8&&(this.output+=String.fromCharCode(e),t-=8,e=t>0?n<<5-t&255:0))},this.finish=function(e){var r=this.output+(0>t?i[bits>>3]:"")+(e?"$":"");return this.output="",r}}function r(e){var r=new t,n=r.update(e,!0);return n}function n(t){var r=new e,n=r.update(t,!0);return n}function u(t,e){"undefined"==typeof f&&(f=require("crypto"));var n=f.createHash("sha1");if(n.digest=function(t){return function(){return r(t.call(this,"binary"))}}(n.digest),e){if("string"==typeof t||Buffer.isBuffer(t))try{return e(null,u(t))}catch(i){return e(i,null)}return t.on("data",function(t){n.update(t)}),void t.on("end",function(){e(null,n.digest())})}return t?n.update(t).digest():n}var i="0123456789abcdefghjkmnpqrtuvwxyz",o={o:0,i:1,l:1,s:5},s=function(){for(var t={},e=0;e<i.length;e++)t[i[e]]=e;for(var r in o)o.hasOwnProperty(r)&&(t[r]=t[""+o[r]]);return s=function(){return t},t};t.prototype.update=function(t,e){for(var r=0;r<t.length;)r+=this.readByte(t[r]);var n=this.output;return this.output="",e&&(n+=this.finish()),n},e.prototype.update=function(t,e){for(var r=0;r<t.length;r++)this.readChar(t[r]);var n=this.output;return this.output="",e&&(n+=this.finish()),n};var f,a;u.file=function(t,e){return"-"==t?(process.stdin.resume(),u(process.stdin,e)):("undefined"==typeof a&&(a=require("fs")),a.stat(t,function(r,n){return r?e(r,null):n.isDirectory()?e({dir:!0,message:"Is a directory"}):u(require("fs").createReadStream(t),e)}))};var d={Decoder:e,Encoder:t,encode:r,decode:n,sha1:u};"undefined"!=typeof window&&(window.base32=d),"undefined"!=typeof module&&module.exports&&(module.exports=d)}();
+                            if ((i+1)<len) {
+                                c = s.charCodeAt(i+1);
+                                // mask top 2 bits
+                                w = 0xc0 & c;
+                               o += a.charAt((r<<2) + (w>>6));
+                                o += a.charAt( (0x3e & c) >> 1 );
+                                r = c & 0x01;
+                                sh = 4;
+                            }
+                            
+                            if ((i+2)<len) {
+                                c = s.charCodeAt(i+2);
+                                // mask top 4 bits
+                                w = 0xf0 & c;
+                                o += a.charAt((r<<4) + (w>>4));
+                                r = 0x0f & c;
+                                sh = 1;
+                            }
 
+                            if ((i+3)<len) {
+                                c = s.charCodeAt(i+3);
+                                // mask top 1 bit
+                                w = 0x80 & c;
+                                o += a.charAt((r<<1) + (w>>7));
+                                o += a.charAt((0x7c & c) >> 2);
+                                r = 0x03 & c;
+                                sh = 3;
+                            }
+
+                            if ((i+4)<len) {
+                                c = s.charCodeAt(i+4);
+                                // mask top 3 bits
+                                w = 0xe0 & c;
+                                o += a.charAt((r<<3) + (w>>5));
+                                o += a.charAt(0x1f & c);
+                                r = 0;
+                                sh = 0;
+                            } 
+                        }
+                        // Calculate length of pad by getting the
+                        // number of words to reach an 8th octet.
+                        if (r!=0) { o += a.charAt(r<<sh); }
+                        var padlen = 8 - (o.length % 8);
+                        // modulus
+                        if (padlen==8) { return o; }
+                        if (padlen==1) { return o + pad; }
+                        if (padlen==3) { return o + pad + pad + pad; }
+                        if (padlen==4) { return o + pad + pad + pad + pad; }
+                        if (padlen==6) { return o + pad + pad + pad + pad + pad + pad; }
+                        console.log('there was some kind of error');
+                        console.log('padlen:'+padlen+' ,r:'+r+' ,sh:'+sh+', w:'+w);
+                    },
+                    decode: function(s) {
+                        var len = s.length;
+                        var apad = this.a + this.pad;
+                        var v,x,r=0,bits=0,c,o='';
+
+                        s = s.toUpperCase();
+
+                        for(i=0;i<len;i+=1) {
+                            v = apad.indexOf(s.charAt(i));
+                            if (v>0 && v<32) {
+                                x = (x << 5) | v;
+                                bits += 5;
+                                if (bits >= 8) {
+                                    c = (x >> (bits - 8)) & 0xff;
+                                    o = o + String.fromCharCode(c);
+                                    bits -= 8;
+                                }
+                            }
+                        }
+                        // remaining bits are < 8
+                        if (bits>0) {
+                            c = ((x << (8 - bits)) & 0xff) >> (8 - bits);
+                            // Don't append a null terminator.
+                            // See the comment at the top about why this sucks.
+                            if (c!==0) {
+                                o = o + String.fromCharCode(c);
+                            }
+                        }
+                        return o;
+                    }
+                };
+
+                var base32hex = {
+                    a: '0123456789ABCDEFGHIJKLMNOPQRSTUV',
+                    pad: '=',
+                    encode: base32.encode,
+                    decode: base32.decode
+                };
+                exports.base32 = base32;
+                exports.base32hex = base32hex;
+           })(this.Conversions = {});
 //Get the browser and browser version that the user is on
 navigator.getAgent= (function(){
     var N= navigator.appName, ua= navigator.userAgent, tem;
@@ -144,7 +252,8 @@ $('a').live('mousedown', function(e){
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
-	lgitem._tg = base32.encode(enTg);
+	lgitem._tg = Conversions.base32.encode(enTg);
+	
 	
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
@@ -171,8 +280,8 @@ function insertPageLoadTrk(){
 	lgitem._ac = 'ld';
 	lgitem._cn = get_market() == undefined?'':get_market();
 	lgitem._se = getSegment();
-	lgitem._cp = base32.encode(getPagePath());
-	lgitem._pt = base32.encode(String(document.title));
+	lgitem._cp = Conversions.base32.encode(getPagePath());
+	lgitem._pt = Conversions.base32.encode(String(document.title));
 	lgitem._qs = getUrlParams();
 	var c = getUrlParamVal('camp_id');
 	//lgitem._camp_id = c == undefined?'':c;
@@ -235,7 +344,7 @@ function createUbCookie(){
 	
 	ub._gi = gaCliendId;
 	ub._vi = trkSessId;
-	ub._re = base32.encode(String(document.referrer));
+	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = is_mobile_device == true ? 'm' : 'c';
 	ub._br = navigator.getAgent;
 	
