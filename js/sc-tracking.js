@@ -175,7 +175,7 @@ function insertPageLoadTrk(){
 	lgitem._pt = base32.encode(String(document.title));
 	lgitem._qs = getUrlParams();
 	var c = getUrlParamVal('camp_id');
-	lgitem._camp_id = c == undefined?'':c;
+	//lgitem._camp_id = c == undefined?'':c;
 	if (c!=undefined || c!=="") {
 	lgitem._scn = schn;
 	lgitem._chn = chn;
