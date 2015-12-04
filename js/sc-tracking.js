@@ -177,7 +177,6 @@ function insertPageLoadTrk(){
 	var c = getUrlParamVal('camp_id');
 	lgitem._camp_id = c == undefined?'':c;
 	var lgitemstr = JSON.stringify(lgitem);
-	if (c!=undefined || c!=="") {
 	   lgitem._scn = schn;
 	   lgitem._chn = chn;
 	   lgitem._cid = cmpid;
@@ -190,7 +189,6 @@ function insertPageLoadTrk(){
 	   lgitem._cmcid = itmobj['I'];
 	   lgitem._cmc = itmobj['R'];
 	   lgitem._cmmc = mkt;
-	}
 	ub._lg.push(lgitemstr);
 	
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
