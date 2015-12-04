@@ -111,7 +111,8 @@ $('a').live('mousedown', function(e){
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
-	lgitem._tg = $(this).attr('href');
+	var enTg = $(this).attr('href');
+	lgitem._tg = base32.encode(enTg);
 	
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
@@ -193,4 +194,3 @@ $(window).on('beforeunload', function(){
 $(document).ready(function(){
 	trkint = setInterval(initLocalTrack, 500);  
 	});
-
