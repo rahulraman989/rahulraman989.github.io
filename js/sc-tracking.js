@@ -176,7 +176,7 @@ function insertPageLoadTrk(){
 	lgitem._qs = getUrlParams();
 	var c = getUrlParamVal('camp_id');
 	lgitem._camp_id = c == undefined?'':c;
-        if (c!=undefined || c!=="") {
+	if (c!=undefined || c!=="") {
 	lgitem._scn = schn;
 	lgitem._chn = chn;
 	lgitem._cid = cmpid;
@@ -189,7 +189,7 @@ function insertPageLoadTrk(){
 	lgitem._cmcid = itmobj['I'];
 	lgitem._cmc = itmobj['R'];
 	lgitem._cmmc = mkt;
-     }
+}
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	
@@ -214,6 +214,19 @@ function insertPageLoadTrk(){
 //	_rf	Ref code 	Captured within the _qs cookie
 //	_sc	Sub chan  code 	Captured within the _qs cookie
 //	_pt	Promo Type	Captured within the _qs cookie
+//	_scn	Sub channel	Sub channel code 
+//	_chn	Campaign Channel	-
+//	_cid	Campaign ID	Full campaign ID
+//	_csc	Campaign Short Code	Unique code for the campaign  with the channel
+//	_cmc	Campaign Country	-
+//	_cmp	Campaign Product	Ex: Credit Cards, Cash One, itunes 
+//	_cmm	Campaign Media 	-
+//	_cmo	Campaign Offer 	Offer related to a campaign
+//	_cmd	Campaign Date 	Campaign launch date 
+//	_cmcid	Campaign Creative ID	Unique Id for  particular marketing creative ie banner
+//	_cmmc	Campaign marketing category	Paid or Channel
+//	_cmc	Campaign Creative	Marketing asset 
+
 function createUbCookie(){
 	ub = new Object();
 	var dt = new Date;
