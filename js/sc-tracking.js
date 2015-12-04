@@ -176,18 +176,20 @@ function insertPageLoadTrk(){
 	lgitem._qs = getUrlParams();
 	var c = getUrlParamVal('camp_id');
 	lgitem._camp_id = c == undefined?'':c;
+        if (c!=undefined || c!=="") {
 	lgitem._scn = schn;
-	   lgitem._chn = chn;
-	   lgitem._cid = cmpid;
-	   lgitem._csc = itmobj['S'];
-	   lgitem._cmc = itmobj['N'];
-	   lgitem._cmp = itmobj['P'];
-	   lgitem._cmm = itmobj['T'];
-	   lgitem._cmo = itmobj['O'];
-	   lgitem._cmd = itmobj['D'];
-	   lgitem._cmcid = itmobj['I'];
-	   lgitem._cmc = itmobj['R'];
-	   lgitem._cmmc = mkt;
+	lgitem._chn = chn;
+	lgitem._cid = cmpid;
+	lgitem._csc = itmobj['S'];
+	lgitem._cmc = itmobj['N'];
+	lgitem._cmp = itmobj['P'];
+	lgitem._cmm = itmobj['T'];
+	lgitem._cmo = itmobj['O'];
+	lgitem._cmd = itmobj['D'];
+	lgitem._cmcid = itmobj['I'];
+	lgitem._cmc = itmobj['R'];
+	lgitem._cmmc = mkt;
+     }
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	
