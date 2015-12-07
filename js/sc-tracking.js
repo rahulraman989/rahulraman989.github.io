@@ -160,8 +160,7 @@ $('a').live('mousedown', function(e){
 window.onbeforeunload=function(){
       var lgitem = new Object();
       loggedOutAt = new Date().getTime();
-      totalTimeSpent = loggedOutAt - loggedInAt;
-	  lgitem._tm = totalTimeSpent;
+      lgitem._tm = loggedOutAt - loggedInAt;
 	  var lgitemstr = JSON.stringify(lgitem);
 	  ub._lg.push(lgitemstr);
 	  $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
