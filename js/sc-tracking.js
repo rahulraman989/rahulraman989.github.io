@@ -157,19 +157,11 @@ $('a').live('mousedown', function(e){
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 	});
 
-window.onbeforeunload=function(){
-      var lgitem = new Object();
-      loggedOutAt = new Date().getTime();
-      lgitem._tm = loggedOutAt - loggedInAt;
-	  var lgitemstr = JSON.stringify(lgitem);
-	  ub._lg.push(lgitemstr);
-	  $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
-	  sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
-  }
-
 function insertPageUnloadTrk(){
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
+	loggedOutAt = new Date().getTime();
+    lgitem._tm = loggedOutAt - loggedInAt;
 	
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
