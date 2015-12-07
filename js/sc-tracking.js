@@ -45,11 +45,11 @@ navigator.getAgent= (function(){
 	else if(M[0].toLowerCase().indexOf('MSIE')>-1){
 		return 'i' + "-" + M[1];
 		}
-	else if(M[0].toLowerCase().indexOf('Safari')>-1){
+	else if(M[0].toLowerCase().indexOf('safari')>-1){
 		return 's' + "-" + M[1];
 		}
 	else{
-		return '0' + "-" + M[1];
+		return 'o' + "-" + M[1];
 		}
 	})();
 
