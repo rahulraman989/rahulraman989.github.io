@@ -3,6 +3,10 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
+var loggedInAt;
+var loggedOutAt;
+var totalTimeSpent;
+loggedInAt = new Date().getTime(); 
 var mktar=new Array;
 mktar["P"]="Paid";mktar["O"]="Owned";mktar["E"]="Earned"
 var chnar=new Array;chnar["B"]="Banner Display";chnar["E"]="Email / EDM";chnar["S"]="Search";chnar["O"]="SEO";chnar["TCH"]="TestChannel";chnar["NA"]="Not Applicable";chnar["FBA"]="Facebook";chnar["NMG"]="NationMedia";chnar["FED"]="SocialFeed";chnar["LIN"]="LINE";chnar["MOB"]="Mobile";chnar["CFM"]="CapitalFM";chnar["YUT"]="YouTube";chnar["GOO"]="Google";chnar["DQA"]="DQA";chnar["GOG"]="Google";chnar["DMO"]="DailyMonitor";chnar["YOT"]="YouTube";chnar["SPH"]="StraitsTimes";chnar["DIG"]="OnlineDigital";chnar["BRS"]="Broadsheet";chnar["BT."]="Businesstimes";chnar["ASO"]="Asiaone";chnar["GVC"]="GoldenVillage";chnar["Yah"]="Yahoo";chnar["BLS"]="BlisMedia";chnar["Goa"]="Goal.com";chnar["SCW"]="Soccerway.com";chnar["RTB"]="RealTimeBidding";chnar["LPP"]="LinkfromPromoPage";chnar["OBL"]="OnlineBankinglogin";chnar["SHW"]="Shaw";chnar["SPP"]="SponsoredPost";chnar["OOH"]="OOH";chnar["SDW"]="SocialDealwebsite";chnar["SDN"]="SocialDealeNewsletter";chnar["ADN"]="Adnear"
@@ -153,6 +157,17 @@ $('a').live('mousedown', function(e){
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 	});
 
+window.onbeforeunload=function(){
+      var lgitem = new Object();
+      loggedOutAt = new Date().getTime();
+      totalTimeSpent = loggedOutAt - loggedInAt;
+	  lgitem._tm = totalTimeSpent;
+	  var lgitemstr = JSON.stringify(lgitem);
+	  ub._lg.push(lgitemstr);
+	  $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	  sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+  }
+
 function insertPageUnloadTrk(){
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
@@ -269,7 +284,7 @@ function initLocalTrack(){
 			}
     	}
 	}
-//beforeunload can not only detect page unloads but can also detect users closing the browser
+//beforeunload can detect page unloads 
 $(window).on('beforeunload', function(){
 	insertPageUnloadTrk();
 	});
