@@ -42,10 +42,10 @@ navigator.getAgent= (function(){
 	else if(M[0].toLowerCase().indexOf("chrome")>-1){
 		return 'c' + "-" + M[1];
 		}
-	else if(M[0].toLowerCase().indexOf('MSIE')){
+	else if(M[0].toLowerCase().indexOf('MSIE')>-1){
 		return 'i' + "-" + M[1];
 		}
-	else if(M[0].toLowerCase().indexOf('Safari')){
+	else if(M[0].toLowerCase().indexOf('Safari')>-1){
 		return 's' + "-" + M[1];
 		}
 	else{
