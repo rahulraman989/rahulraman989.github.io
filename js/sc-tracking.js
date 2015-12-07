@@ -143,12 +143,16 @@ function appendUbToBtn(){
 	}
 $('a').live('mousedown', function(e){
 	//alert($(this).text().trim())
+	
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
-	lgitem._is = $(this).attr('src');
+	//lgitem._is = $(this).attr('src');
 	lgitem._tg = Conversions.base32.encode(enTg);
+	if(jQuery(this).find('img').length){
+	 	lgitem._is = jQuery(this).find('img').attr("src");
+	}
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	
