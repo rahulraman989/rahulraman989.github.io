@@ -38,19 +38,19 @@ navigator.getAgent= (function(){
     M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
 	
 	if(M[0] == 'Firefox'){
-		return 'f-M[1]';
+		return 'f' + M[1];
 		}
 	else if(M[0] == 'Chrome'){
-		return 'c-M[1]';
+		return 'c' + M[1];
 		}
 	else if(M[0] == 'MSIE'){
-		return 'i-M[1]';
+		return 'i' + M[1];
 		}
 	else if(M[0] == 'Safari'){
-		return 's-M[1]';
+		return 's' + M[1];
 		}
 	else{
-		return 'o-M[1]';
+		return 'o' + M[1];
 		}
 	})();
 
