@@ -29,7 +29,15 @@ var n=t[_0x6db5[4]](_0x6db5[3]);
 	var mkt = mktar[itmobj['M']] == undefined ? itmobj['M'] : mktar[itmobj['M']];
 //Genenric code for Base 32 encoding 
 !function(r){var a={a:"ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",pad:"=",encode:function(r){var a,e,t=this.a,h=this.pad,c=r.length,o="",d=0,n=0;for(i=0;i<c;i+=5)e=r.charCodeAt(i),a=248&e,o+=t.charAt(a>>3),d=7&e,n=2,i+1<c&&(e=r.charCodeAt(i+1),a=192&e,o+=t.charAt((d<<2)+(a>>6)),o+=t.charAt((62&e)>>1),d=1&e,n=4),i+2<c&&(e=r.charCodeAt(i+2),a=240&e,o+=t.charAt((d<<4)+(a>>4)),d=15&e,n=1),i+3<c&&(e=r.charCodeAt(i+3),a=128&e,o+=t.charAt((d<<1)+(a>>7)),o+=t.charAt((124&e)>>2),d=3&e,n=3),i+4<c&&(e=r.charCodeAt(i+4),a=224&e,o+=t.charAt((d<<3)+(a>>5)),o+=t.charAt(31&e),d=0,n=0);0!=d&&(o+=t.charAt(d<<n));var A=8-o.length%8;return 8==A?o:1==A?o+h:3==A?o+h+h+h:4==A?o+h+h+h+h:6==A?o+h+h+h+h+h+h:void 0},decode:function(r){var a,e,t,h=r.length,c=this.a+this.pad,o=0,d="";for(r=r.toUpperCase(),i=0;i<h;i+=1)a=c.indexOf(r.charAt(i)),a>0&&32>a&&(e=e<<5|a,o+=5,o>=8&&(t=e>>o-8&255,d+=String.fromCharCode(t),o-=8));return o>0&&(t=(e<<8-o&255)>>8-o,0!==t&&(d+=String.fromCharCode(t))),d}},e={a:"0123456789ABCDEFGHIJKLMNOPQRSTUV",pad:"=",encode:a.encode,decode:a.decode};r.base32=a,r.base32hex=e}(this.Conversions={});
-
+//Get the device type (mobile or desktop)
+function deviceInfo() {
+	if (!/Mobi/.test(navigator.userAgent)) {
+	    return "m";
+	}
+	else {
+		return "d";
+	}
+}
 //Get the browser and browser version that the user is on
 navigator.getAgent= (function(){
     var N= navigator.appName, ua= navigator.userAgent, tem;
@@ -43,8 +51,8 @@ navigator.getAgent= (function(){
 		return 'c' + "-" + M[1];
 		}
 	else if(M[0].toLowerCase().indexOf("safari")>-1){
-		return 's' + "-" + M[1];
-		}
+			return 's' + "-" + M[1];
+			}
 	else if(M[0].toLowerCase().indexOf("msie")>-1){
 		return 'i' + "-" + M[1];
 		}
@@ -244,7 +252,7 @@ function createUbCookie(){
 	ub._gi = gaCliendId;
 	ub._vi = trkSessId;
 	ub._re = Conversions.base32.encode(String(document.referrer));
-	ub._de = is_mobile_device == true ? 'm' : 'c';
+	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
 	
 	ub._lg = new Array();
