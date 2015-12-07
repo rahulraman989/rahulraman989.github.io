@@ -36,21 +36,20 @@ navigator.getAgent= (function(){
     var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
     if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
     M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
-	
-	if(M[0] == 'Firefox'){
-		return 'f' + M[1];
+	if (M[0].toLowerCase().indexOf("firefox")>-1) {
+		return 'f' + "-" + M[1];
+	}
+	else if(M[0].toLowerCase().indexOf("chrome")>-1){
+		return 'c' + "-" + M[1];
 		}
-	else if(M[0] == 'Chrome'){
-		return 'c' + M[1];
+	else if(M[0].toLowerCase().indexOf('MSIE')){
+		return 'i' + "-" + M[1];
 		}
-	else if(M[0] == 'MSIE'){
-		return 'i' + M[1];
-		}
-	else if(M[0] == 'Safari'){
-		return 's' + M[1];
+	else if(M[0].toLowerCase().indexOf('Safari')){
+		return 's' + "-" + M[1];
 		}
 	else{
-		return 'o' + M[1];
+		return '0' + "-" + M[1];
 		}
 	})();
 
