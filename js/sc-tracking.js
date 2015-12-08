@@ -66,6 +66,16 @@ navigator.getAgent= (function(){
 // Short names for each of the segments parsed from the URL
 function getSegment(){
 	var s = String(document.location).split('/')[4];
+	var _seg = {
+           "priority" : "pr",
+           "business-banking-sme" : "bs",
+           "saadiq" : "sq",
+           "rmb" : "rm",
+           "en" : "pv",
+	   "nri" : "ni",
+	   "employee-banking": "em",
+	   "staff": "st"
+    };
 if(s in _seg) 
    return items[s];
 else 
