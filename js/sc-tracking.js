@@ -66,25 +66,11 @@ navigator.getAgent= (function(){
 // Short names for each of the segments parsed from the URL
 function getSegment(){
 	var s = String(document.location).split('/')[4];
-	if(s == 'priority'){
-		return 'pr';
-		}
-	else if(s == 'private'){
-		return 'pv';
-		}
-	else if(s == 'sme'){
-		return 's';
-		}
-	else if(s == 'saadiq'){
-		return 'sq';
-		}
-	else if(s == 'staff'){
-		return 'sf';
-		}
-	else{
-		return 'ps';
-		}
-	}
+if(s in _seg) 
+   return items[s];
+else 
+   return "pe";
+}
 
 // Get the list of all URL parameters from the URL
 function getUrlParams(){
