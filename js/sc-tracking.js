@@ -132,7 +132,7 @@ function appendUbToBtn(){
 		}
 	});
 }
-$('a').live('mousedown', function(e){
+$('a').on('mousedown', function(e){
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
@@ -145,11 +145,11 @@ $('a').live('mousedown', function(e){
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
-	appendUbToBtn();
+	//appendUbToBtn();
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
 //Home Page Banner clicks 
-if ($('.bxslider li img').live('mousedown',function(e) {
+if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
      lgitem._hb = jQuery(this).attr("src"); 
 	 var lgitemstr = JSON.stringify(lgitem);
@@ -158,7 +158,7 @@ if ($('.bxslider li img').live('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
 //Produt Category pages banner tracking
-else if ($('#featured img').live('mousedown',function(e) {
+else if ($('#featured img').on('mousedown',function(e) {
      var lgitem = new Object();
      lgitem._pb = jQuery(this).attr("src"); 
 	 var lgitemstr = JSON.stringify(lgitem);
