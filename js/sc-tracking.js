@@ -31,12 +31,10 @@ var n=t[_0x6db5[4]](_0x6db5[3]);
 !function(r){var a={a:"ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",pad:"=",encode:function(r){var a,e,t=this.a,h=this.pad,c=r.length,o="",d=0,n=0;for(i=0;i<c;i+=5)e=r.charCodeAt(i),a=248&e,o+=t.charAt(a>>3),d=7&e,n=2,i+1<c&&(e=r.charCodeAt(i+1),a=192&e,o+=t.charAt((d<<2)+(a>>6)),o+=t.charAt((62&e)>>1),d=1&e,n=4),i+2<c&&(e=r.charCodeAt(i+2),a=240&e,o+=t.charAt((d<<4)+(a>>4)),d=15&e,n=1),i+3<c&&(e=r.charCodeAt(i+3),a=128&e,o+=t.charAt((d<<1)+(a>>7)),o+=t.charAt((124&e)>>2),d=3&e,n=3),i+4<c&&(e=r.charCodeAt(i+4),a=224&e,o+=t.charAt((d<<3)+(a>>5)),o+=t.charAt(31&e),d=0,n=0);0!=d&&(o+=t.charAt(d<<n));var A=8-o.length%8;return 8==A?o:1==A?o+h:3==A?o+h+h+h:4==A?o+h+h+h+h:6==A?o+h+h+h+h+h+h:void 0},decode:function(r){var a,e,t,h=r.length,c=this.a+this.pad,o=0,d="";for(r=r.toUpperCase(),i=0;i<h;i+=1)a=c.indexOf(r.charAt(i)),a>0&&32>a&&(e=e<<5|a,o+=5,o>=8&&(t=e>>o-8&255,d+=String.fromCharCode(t),o-=8));return o>0&&(t=(e<<8-o&255)>>8-o,0!==t&&(d+=String.fromCharCode(t))),d}},e={a:"0123456789ABCDEFGHIJKLMNOPQRSTUV",pad:"=",encode:a.encode,decode:a.decode};r.base32=a,r.base32hex=e}(this.Conversions={});
 //Get the device type (mobile or desktop)
 function deviceInfo() {
-	if (/Mobi/.test(navigator.userAgent)) {
+	if (/Mobi/.test(navigator.userAgent))
 	    return "m";
-	}
-	else {
+	else
 		return "d";
-	}
 }
 //Get the browser and browser version that the user is on
 navigator.getAgent= (function(){
@@ -44,141 +42,143 @@ navigator.getAgent= (function(){
     var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
     if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
     M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
-	if (M[0].toLowerCase().indexOf("firefox")>-1) {
+	if (M[0].toLowerCase().indexOf("firefox")>-1)
 		return 'f' + "-" + M[1];
-	}
-	else if(M[0].toLowerCase().indexOf("chrome")>-1){
+	else if(M[0].toLowerCase().indexOf("chrome")>-1)
 		return 'c' + "-" + M[1];
-		}
-	else if(M[0].toLowerCase().indexOf("safari")>-1){
-			return 's' + "-" + M[1];
-			}
-	else if(M[0].toLowerCase().indexOf("msie")>-1){
+	else if(M[0].toLowerCase().indexOf("safari")>-1)
+		return 's' + "-" + M[1];
+	else if(M[0].toLowerCase().indexOf("msie")>-1)
 		return 'i' + "-" + M[1];
-		}
-	else{
-		return 'o' + "-" + M[1];
-		}
+	else
+		return M[0] + "-" + M[1];
 	})();
-
 // Get the segment within the sc.com website 
 // Segments can be the following : Personal, Priority and SME
 // Short names for each of the segments parsed from the URL
 function getSegment(){
 	var s = String(document.location).split('/')[4];
 	var _seg = {
-           "priority" : "pr",
-           "business-banking-sme" : "bs",
-           "saadiq" : "sq",
-           "rmb" : "rm",
-           "en" : "pv",
-	   "nri" : "ni",
-	   "employee-banking": "em",
-	   "staff": "st"
+        "priority" : "pr",
+        "business-banking-sme" : "bs",
+        "saadiq" : "sq",
+        "rmb" : "rm",
+        "en" : "pv",
+	    "nri" : "ni",
+	    "employee-banking": "eb",
+	    "staff": "st"
     };
 if(s in _seg) 
    return items[s];
 else 
    return "pe";
 }
-
 // Get the list of all URL parameters from the URL
 function getUrlParams(){
 	var l = String(document.location);
 	if(l.indexOf('#') > -1){
 		return l.split('#')[1];
-		}
-	else{
+	}
+	else {
 		if(l.indexOf('?') > -1){
-			return l.split('?')[1];
-			}
-		else{
-			return '';
-			}
+		  return l.split('?')[1];
+		}
+		else {
+			  return '';
 		}
 	}
+} 
 //Get the values for each of the URL parameters that have been extracted 
 function getUrlParamVal(p) {
     var sPageURL = String(document.location).split('?')[1];
-	if(sPageURL == undefined){
-		return '';
-		}
+	if(sPageURL == undefined)
+	    return '';
 	sURLVariables = sPageURL.split('&')
 	var sParameterName, i;
 	for (i = 0; i < sURLVariables.length; i++) {
         sParameterName = sURLVariables[i].split('=');
         if (sParameterName[0] === p) {
             return sParameterName[1] === undefined ? true : sParameterName[1];
-        	}
-    	}
-	}
+        }
+    }
+}
 //Random generated 64 bit UUID which is the visitor ID and it will remain constant per user. This will help identify new and returning users 
 function uniqId() {
-  function uid() {
+  function uid() { 
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);
-  }
+    }
   return uid() + uid() + '-' + uid() + '-' + uid() + '-' + uid() + '-' + uid() + uid() + uid();
 }
 //Function to get the cookie on the whole and pass it to the forms platform onclick of "Apply Now"
 //The cookie is passed onto the forms in the form of a URL query parameter
 // As the form loads, the parameter will be saved into the XSD
 function appendUbToBtn(){
-	if($.cookie('_ub')){
+	if($.cookie('_ub'))
 		ubparam = '_ub='+$.cookie('_ub');
-		}
-	else{
+	else
 		ubparam = '';
-		}
 	//alert(ubparam)
 	$('a[href]').each(function () {
-		if($(this).html().toLowerCase()==="apply now"){
+		if($(this).html().toLowerCase()==="apply now") {
 		  var old_href_value= $(this).attr('href');
 		  var link_has_querystring = old_href_value.indexOf("?");
-		  if(link_has_querystring!==-1){
+		  if(link_has_querystring!==-1) {
 			$(this).attr('href',old_href_value +'&' + window.location.search.substr(1)+ubparam);
-		  }else{
+		  } else {
 			$(this).attr('href',old_href_value+"?"+window.location.search.substr(1)+ubparam);
-		  }
+		   }
 		}
-	  });
-	}
+	});
+}
 $('a').live('mousedown', function(e){
-	//alert($(this).text().trim())
-	
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
 	//lgitem._is = $(this).attr('src');
 	lgitem._tg = Conversions.base32.encode(enTg);
-	if(jQuery(this).find('img').length){
+	if(jQuery(this).find('img').length) {
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
-	
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	appendUbToBtn();
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
-	});
-
-function insertPageUnloadTrk(){
+});
+//Home Page Banner clicks 
+if ($('.bxslider li img').live('mousedown',function(e) {
+     var lgitem = new Object();
+     lgitem._hb = jQuery(this).attr("src"); 
+	 var lgitemstr = JSON.stringify(lgitem);
+	 ub._lg.push(lgitemstr);
+	 $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+   }));
+//Produt Category pages banner tracking
+else if ($('#featured img').live('mousedown',function(e) {
+     var lgitem = new Object();
+     lgitem._pb = jQuery(this).attr("src"); 
+	 var lgitemstr = JSON.stringify(lgitem);
+	 ub._lg.push(lgitemstr);
+	 $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+   }));
+function insertPageUnloadTrk() {
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
-	
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
-	
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
-	}
+}
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
-function insertPageLoadTrk(){
+function insertPageLoadTrk() {
 	var lgitem = new Object();
 	lgitem._ac = 'ld';
 	lgitem._cn = get_market() == undefined?'':get_market();
@@ -189,25 +189,24 @@ function insertPageLoadTrk(){
 	var c = getUrlParamVal('camp_id');
 	//lgitem._camp_id = c == undefined?'':c;
 	if (c!=undefined || c!=="") {
-	lgitem._scn = schn;
-	lgitem._chn = chn;
-	lgitem._cid = cmpid;
-	lgitem._csc = itmobj['S'];
-	lgitem._cmc = itmobj['N'];
-	lgitem._cmp = itmobj['P'];
-	lgitem._cmm = itmobj['T'];
-	lgitem._cmo = itmobj['O'];
-	lgitem._cmd = itmobj['D'];
-	lgitem._cmcid = itmobj['I'];
-	lgitem._cmc = itmobj['R'];
-	lgitem._cmmc = mkt;
-}
+	  lgitem._scn = schn;
+	  lgitem._chn = chn;
+	  lgitem._cid = cmpid;
+	  lgitem._csc = itmobj['S'];
+	  lgitem._cmc = itmobj['N'];
+	  lgitem._cmp = itmobj['P'];
+	  lgitem._cmm = itmobj['T'];
+	  lgitem._cmo = itmobj['O'];
+	  lgitem._cmd = itmobj['D'];
+	  lgitem._cmcid = itmobj['I'];
+	  lgitem._cmc = itmobj['R'];
+	  lgitem._cmmc = mkt;
+    }
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
-	
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
-	}
+}
 //Function logic where the cookie is created 
 // Names of JSON key value pairs that are stored in the cookie explained below: 
 //	_vi	Visitor ID	Random generated 64 bit UUID
@@ -238,54 +237,48 @@ function insertPageLoadTrk(){
 //	_cmcid	Campaign Creative ID	Unique Id for  particular marketing creative ie banner
 //	_cmmc	Campaign marketing category	Paid or Channel
 //	_cmc	Campaign Creative	Marketing asset 
-
-function createUbCookie(){
+function createUbCookie() {
 	ub = new Object();
 	var dt = new Date;
-	//trkSessId = dt.getTime();
 	trkSessId = uniqId() + '-' + dt.getTime();
-	
 	ub._gi = gaCliendId;
 	ub._vi = trkSessId;
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
-	
 	ub._lg = new Array();
-	
 	insertPageLoadTrk();
-	}
+}
 //Code to get the value of the client ID that google sets 
 //This client id is specific to a user 
 //Saving this will enable making a correlation between data collected in google analytics and data collected in our logging system 
-function initLocalTrack(){
-	if(ga != undefined){
+function initLocalTrack() {
+	if(ga != undefined) {
     	if(ga.getAll == undefined){
 			return;
-			}
+		}
 		var trackers = ga.getAll();
 		var i, len;
 		for (i = 0, len = trackers.length; i < len; i += 1) {
 			if (trackers[i].get('trackingId') ==="UA-46697978-2") {
 				gaCliendId  = trackers[i].get('clientId');
 				clearInterval(trkint);
-				}
 			}
-		
-		if($.cookie('_ub')){
+		}
+		if($.cookie('_ub')) {
 			var a = $.cookie('_ub');
 			ub = JSON.parse(a);
 			insertPageLoadTrk();
-			}
-		else{
+		}
+		else {
 			createUbCookie();
-			}
-    	}
-	}
+		}
+    }
+}
 //beforeunload can detect page unloads 
 $(window).on('beforeunload', function(){
 	insertPageUnloadTrk();
 	});
 $(document).ready(function(){
 	trkint = setInterval(initLocalTrack, 500);  
-	});
+});
