@@ -138,25 +138,21 @@ $('a').on('mousedown', function(e){
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
 	//lgitem._is = $(this).attr('src');
-	//lgitem._tg = Conversions.base32.encode(enTg);
-	lgitem._tg = enTg;
+	lgitem._tg = Conversions.base32.encode(enTg);
 	if(jQuery(this).find('img').length) {
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
-	var lgitemstr = JSON.stringify(Conversions.base32.encode(lgitem));
+	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	//appendUbToBtn();
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
-	//var _gc = $.cookie("_ub");
-	//var _ecv =  Conversions.base32.encode(_gc);
-	//console.log(_ecv);
 });
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
      lgitem._hb = jQuery(this).attr("src"); 
-	 var lgitemstr = JSON.stringify(Conversions.base32.encode(lgitem));
+	 var lgitemstr = JSON.stringify(lgitem);
 	 ub._lg.push(lgitemstr);
 	 $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
@@ -165,7 +161,7 @@ if ($('.bxslider li img').on('mousedown',function(e) {
 else if ($('#featured img').on('mousedown',function(e) {
      var lgitem = new Object();
      lgitem._pb = jQuery(this).attr("src"); 
-	 var lgitemstr = JSON.stringify(Conversions.base32.encode(lgitem));
+	 var lgitemstr = JSON.stringify(lgitem);
 	 ub._lg.push(lgitemstr);
 	 $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
@@ -175,7 +171,7 @@ function insertPageUnloadTrk() {
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
-	var lgitemstr = JSON.stringify(Conversions.base32.encode(lgitem));
+	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
@@ -187,8 +183,8 @@ function insertPageLoadTrk() {
 	lgitem._ac = 'ld';
 	lgitem._cn = get_market() == undefined?'':get_market();
 	lgitem._se = getSegment();
-	lgitem._cp = getPagePath();
-	lgitem._pt = String(document.title);
+	lgitem._cp = Conversions.base32.encode(getPagePath());
+	lgitem._pt = Conversions.base32.encode(String(document.title));
 	lgitem._qs = getUrlParams();
 	var c = getUrlParamVal('camp_id');
 	//lgitem._camp_id = c == undefined?'':c;
@@ -206,7 +202,7 @@ function insertPageLoadTrk() {
 	  lgitem._cmc = itmobj['R'];
 	  lgitem._cmmc = mkt;
     }
-	var lgitemstr = JSON.stringify(Conversions.base32.encode(lgitem));
+	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
@@ -241,17 +237,13 @@ function insertPageLoadTrk() {
 //	_cmcid	Campaign Creative ID	Unique Id for  particular marketing creative ie banner
 //	_cmmc	Campaign marketing category	Paid or Channel
 //	_cmc	Campaign Creative	Marketing asset 
-//  _tm	    Time on Page
-//  _is	    Image src	source of pintiles and images on the site 
-//  _hb	    Home pge banner src	source of home page banners across all markets
-//  _pb	    Product Category pages banner src	source of product category page banners across all markets
 function createUbCookie() {
 	ub = new Object();
 	var dt = new Date;
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub._gi = gaCliendId;
 	ub._vi = trkSessId;
-	ub._re = String(document.referrer);
+	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
 	ub._lg = new Array();
