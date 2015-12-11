@@ -145,6 +145,10 @@ $('a').on('mousedown', function(e){
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	var data = $.cookie("_ub");
+	 $.post("demo_test.asp", function(data, status){
+        alert("Data: " + data + "\nStatus: " + success);
+    });
 	//appendUbToBtn();
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
