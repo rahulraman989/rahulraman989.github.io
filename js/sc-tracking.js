@@ -146,18 +146,14 @@ $('a').on('mousedown', function(e){
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	var data = $.cookie("_ub");
-	//$.post("http://digital.sc.com/dev/log.php", {data: data});
-	//appendUbToBtn();
-	
-	var myKeyVals = { data : data }
-var saveData = $.ajax({
+	var _kv = { data : data }
+    var saveData = $.ajax({
       type: 'POST',
       url: "http://digital.sc.com/dev/log.php",
-      data: myKeyVals,
+      data: _kv,
       dataType: "text",
       success: function(resultData) {   }
-});
-	
+    });
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
 
@@ -189,7 +185,14 @@ function insertPageUnloadTrk() {
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	var data = $.cookie("_ub");
-	 $.post("http://digital.sc.com/dev/log.php", {data: data});
+	var _kv = { data : data }
+    var saveData = $.ajax({
+      type: 'POST',
+      url: "http://digital.sc.com/dev/log.php",
+      data: _kv,
+      dataType: "text",
+      success: function(resultData) {   }
+    });
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
@@ -222,7 +225,14 @@ function insertPageLoadTrk() {
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	var data = $.cookie("_ub");
-	 $.post("http://digital.sc.com/dev/log.php", {data: data});
+	var _kv = { data : data }
+    var saveData = $.ajax({
+      type: 'POST',
+      url: "http://digital.sc.com/dev/log.php",
+      data: _kv,
+      dataType: "text",
+      success: function(resultData) {   }
+    });
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
 }
 //Function logic where the cookie is created 
