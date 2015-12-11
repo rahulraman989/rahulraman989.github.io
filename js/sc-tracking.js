@@ -146,10 +146,22 @@ $('a').on('mousedown', function(e){
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
 	var data = $.cookie("_ub");
-	$.post("http://digital.sc.com/dev/log.php", {data: data});
+	//$.post("http://digital.sc.com/dev/log.php", {data: data});
 	//appendUbToBtn();
+	
+	var myKeyVals = { data : data }
+var saveData = $.ajax({
+      type: 'POST',
+      url: "http://digital.sc.com/dev/log.php",
+      data: myKeyVals,
+      dataType: "text",
+      success: function(resultData) {   }
+});
+	
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
+
+
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
