@@ -145,15 +145,20 @@ $('a').on('mousedown', function(e){
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
-	var data = $.cookie("_ub");
-	var _kv = { data : data }
-    var saveData = $.ajax({
-      type: 'POST',
-      url: "http://digital.sc.com/dev/log.php",
-      data: _kv,
-      dataType: "text",
-      success: function(resultData) {   }
-    });
+	function logCookieData(obj){ 
+      var data=JSON.stringify (obj);
+      $.ajax({
+       type: 'POST',
+       url: 'https://ys5seocy27.execute-api.ap-northeast-1.amazonaws.com/prod/log',
+       data: data,
+       success: function(data) {},
+       contentType: "application/json",
+       dataType: 'json'
+      });
+    }
+	var gc = $.cookie("_ub");
+	var _kv = { data : gc }
+	logCookieData(_kv);
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
 
@@ -184,15 +189,20 @@ function insertPageUnloadTrk() {
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
-	var data = $.cookie("_ub");
-	var _kv = { data : data }
-    var saveData = $.ajax({
-      type: 'POST',
-      url: "http://digital.sc.com/dev/log.php",
-      data: _kv,
-      dataType: "text",
-      success: function(resultData) {   }
-    });
+	function logCookieData(obj){ 
+      var data=JSON.stringify (obj);
+      $.ajax({
+       type: 'POST',
+       url: 'https://ys5seocy27.execute-api.ap-northeast-1.amazonaws.com/prod/log',
+       data: data,
+       success: function(data) {},
+       contentType: "application/json",
+       dataType: 'json'
+      });
+    }
+	var gc = $.cookie("_ub");
+	var _kv = { data : gc }
+	logCookieData(_kv);
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
@@ -224,15 +234,20 @@ function insertPageLoadTrk() {
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
-	var data = $.cookie("_ub");
-	var _kv = { data : data }
-    var saveData = $.ajax({
-      type: 'POST',
-      url: "http://digital.sc.com/dev/log.php",
-      data: _kv,
-      dataType: "text",
-      success: function(resultData) {   }
-    });
+      function logCookieData(obj){ 
+      var data=JSON.stringify (obj);
+      $.ajax({
+       type: 'POST',
+       url: 'https://ys5seocy27.execute-api.ap-northeast-1.amazonaws.com/prod/log',
+       data: data,
+       success: function(data) {},
+       contentType: "application/json",
+       dataType: 'json'
+      });
+    }
+	var gc = $.cookie("_ub");
+	var _kv = { data : gc }
+	logCookieData(_kv);
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
 }
 //Function logic where the cookie is created 
