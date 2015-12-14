@@ -3,9 +3,8 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
-var gv;
-var gcval;
-var cs;
+var ub1;
+var ub2;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -136,6 +135,8 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
+	ub1 = new Object();
+	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
@@ -146,8 +147,8 @@ $('a').on('mousedown', function(e){
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = lgitem;
-	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	ub1._lg.push(lgitemstr);
+	$.cookie('_ub', JSON.stringify(ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -160,12 +161,14 @@ $('a').on('mousedown', function(e){
       });
     }
 	var gc = $.cookie("_ub");
-	//console.log("SLURP LOG");
-	//console.log(gc);
+	console.log("SLURP LOG");
+	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
 });
+
+
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
@@ -184,14 +187,16 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
-function insertPageUnloadTrk() {
+function insertPageUnloadTrk() 
+    ub2 = new Object();
+	ub2._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
-	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	ub2._lg.push(lgitemstr);
+	$.cookie('_ub', JSON.stringify(ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -206,7 +211,7 @@ function insertPageUnloadTrk() {
 	var gc = $.cookie("_ub");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
@@ -236,17 +241,7 @@ function insertPageLoadTrk() {
     }
 	var lgitemstr = lgitem;
 	ub._lg.push(lgitemstr);
-	gv = $.cookie("_ub");
-	function getByteSize(s) {
-      return encodeURIComponent('<q></q>' + s).length;
-    }
-	cs = getByteSize(gv);
-	if (cs>=3000) {
-	  $.cookie('_ub1', JSON.stringify(ub), { expires: 7});
-	}
-	else {
-	  $.cookie('_ub', JSON.stringify(ub), { expires: 7});
-	}
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
       function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -258,13 +253,8 @@ function insertPageLoadTrk() {
        dataType: 'json'
       });
     }
-	if (cs>=3000) {
-	   gcval = $.cookie("_ub1");
-	}
-	else {
-	  gcval = $.cookie("_ub");
-	}
-	var _kv = { data : gcval }
+	var gc = $.cookie("_ub");
+	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
 }
