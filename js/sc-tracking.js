@@ -3,8 +3,6 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
-var ub1;
-var ub2;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -135,9 +133,6 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
-    createUbCookie();
-    ub1  = new Object();
-	ub1._lg1 = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
@@ -148,8 +143,8 @@ $('a').on('mousedown', function(e){
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = lgitem;
-	ub1._lg1.push(lgitemstr);
-	$.cookie('_ub1', JSON.stringify(ub1), { expires: 7});
+	ub._lg.push(lgitemstr);
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -161,13 +156,15 @@ $('a').on('mousedown', function(e){
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub1");
+	var gc = $.cookie("_ub");
 	console.log("SLURP LOG");
 	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
+	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
+
+
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
@@ -187,16 +184,13 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
 function insertPageUnloadTrk() {
-    createUbCookie();
-    ub2  = new Object();
-	ub2._lg2 = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
-	ub2._lg2.push(lgitemstr);
-	$.cookie('_ub2', JSON.stringify(ub2), { expires: 7});
+	ub._lg.push(lgitemstr);
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -208,16 +202,15 @@ function insertPageUnloadTrk() {
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub2");
+	var gc = $.cookie("_ub");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
 function insertPageLoadTrk() {
 	var lgitem = new Object();
-	ub._lg = new Array();
 	lgitem._ac = 'ld';
 	lgitem._cn = get_market() == undefined?'':get_market();
 	lgitem._se = getSegment();
@@ -289,7 +282,6 @@ function insertPageLoadTrk() {
 //	_cmcid	Campaign Creative ID	Unique Id for  particular marketing creative ie banner
 //	_cmmc	Campaign marketing category	Paid or Channel
 //	_cmc	Campaign Creative	Marketing asset 
-
 function createUbCookie() {
 	ub = new Object();
 	var dt = new Date;
@@ -299,8 +291,9 @@ function createUbCookie() {
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
+	ub._lg = new Array();
+	insertPageLoadTrk();
 }
-
 //Code to get the value of the client ID that google sets 
 //This client id is specific to a user 
 //Saving this will enable making a correlation between data collected in google analytics and data collected in our logging system 
@@ -324,7 +317,6 @@ function initLocalTrack() {
 		}
 		else {
 			createUbCookie();
-			insertPageLoadTrk();
 		}
     }
 }
