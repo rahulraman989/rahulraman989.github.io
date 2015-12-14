@@ -135,7 +135,7 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
-	//createUbCookie();
+	createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
@@ -189,6 +189,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
    function insertPageUnloadTrk() {
+	   createUbCookie();
     ub2 = new Object();
 	ub2._lg = new Array();
 	var lgitem = new Object();
