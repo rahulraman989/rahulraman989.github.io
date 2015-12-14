@@ -2,7 +2,7 @@ var trkint;
 var ga;
 var gaCliendId;
 var trkSessId;
-var ub;
+var ub = [];
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
