@@ -5,6 +5,7 @@ var trkSessId;
 var ub;
 var gc;
 var cs;
+var sz;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -149,7 +150,8 @@ $('a').on('mousedown', function(e){
 	function getByteSize(s) {
       return encodeURIComponent('<q></q>' + s).length;
     }
-	cs = getByteSize(_ub);
+	sz = $.cookie("_ub");
+	cs = getByteSize(sz);
 	if (cs>=3000) {
 	  $.cookie('_ub1', JSON.stringify(ub), { expires: 7});
 	}
@@ -209,7 +211,8 @@ function insertPageUnloadTrk() {
 	function getByteSize(s) {
       return encodeURIComponent('<q></q>' + s).length;
     }
-	cs = getByteSize(_ub);
+	sz = $.cookie("_ub");
+	cs = getByteSize(sz);
 	if (cs>=3000) {
 	  $.cookie('_ub1', JSON.stringify(ub), { expires: 7});
 	}
@@ -268,7 +271,8 @@ function insertPageLoadTrk() {
 	function getByteSize(s) {
       return encodeURIComponent('<q></q>' + s).length;
     }
-	cs = getByteSize(_ub);
+	sz = $.cookie("_ub");
+	cs = getByteSize(sz);
 	if (cs>=3000) {
 	  $.cookie('_ub1', JSON.stringify(ub), { expires: 7});
 	}
