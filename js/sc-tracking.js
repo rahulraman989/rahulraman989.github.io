@@ -300,7 +300,6 @@ function createUbCookie() {
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub._gi = gaCliendId;
 	ub._vi = trkSessId;
-	setUIDs();
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
