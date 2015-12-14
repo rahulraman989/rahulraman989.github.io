@@ -205,7 +205,7 @@ function insertPageUnloadTrk() {
 	var gc = $.cookie("_ub");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify ub), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
