@@ -136,6 +136,7 @@ function appendUbToBtn(){
 }
 $('a').on('mousedown', function(e){
     ub1  = new Object();
+	ub1._lg1 = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
@@ -146,7 +147,7 @@ $('a').on('mousedown', function(e){
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = lgitem;
-	ub1._lg.push(lgitemstr);
+	ub1._lg1.push(lgitemstr);
 	$.cookie('_ub1', JSON.stringify(ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
@@ -186,12 +187,13 @@ else if ($('#featured img').on('mousedown',function(e) {
    }));
 function insertPageUnloadTrk() {
     ub2  = new Object();
+	ub2._lg2 = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
-	ub2._lg.push(lgitemstr);
+	ub2._lg2.push(lgitemstr);
 	$.cookie('_ub2', JSON.stringify(ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
