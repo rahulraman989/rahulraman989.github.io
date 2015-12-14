@@ -135,16 +135,15 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
+	createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
+	lgitem._gi = ub._gi;
+	lgitem._vi = ub._vi;
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
-	var dt = new Date;
-	trkSessId = uniqId() + '-' + dt.getTime();
-	ub1._gi = gaCliendId;
-	ub1._vi = trkSessId;
 	//lgitem._is = $(this).attr('src');
 	lgitem._tg = Conversions.base32.encode(enTg);
 	if(jQuery(this).find('img').length) {
@@ -192,16 +191,15 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
    function insertPageUnloadTrk() {
+	   createUbCookie();
     ub2 = new Object();
 	ub2._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
+	lgitem._gi = ub._gi;
+	lgitem._vi = ub._vi;
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
-	var dt = new Date;
-	trkSessId = uniqId() + '-' + dt.getTime();
-	ub2._gi = gaCliendId;
-	ub2._vi = trkSessId;
 	var lgitemstr = lgitem;
 	ub2._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub2), { expires: 7});
@@ -302,6 +300,7 @@ function createUbCookie() {
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub._gi = gaCliendId;
 	ub._vi = trkSessId;
+	setUIDs();
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
