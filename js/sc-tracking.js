@@ -3,8 +3,6 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
-var ub1;
-var ub2;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -145,8 +143,8 @@ $('a').on('mousedown', function(e){
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = lgitem;
-	ub1._lg.push(lgitemstr);
-	$.cookie('_ub1', JSON.stringify(ub1), { expires: 7});
+	ub._lg.push(lgitemstr);
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -158,7 +156,7 @@ $('a').on('mousedown', function(e){
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub1");
+	var gc = $.cookie("_ub");
 	console.log("SLURP LOG");
 	console.log(gc);
 	var _kv = { data : gc }
@@ -185,15 +183,14 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
- 
 function insertPageUnloadTrk() {
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
-	ub2._lg.push(lgitemstr);
-	$.cookie('_ub2', JSON.stringify(ub2), { expires: 7});
+	ub._lg.push(lgitemstr);
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -205,10 +202,10 @@ function insertPageUnloadTrk() {
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub2");
+	var gc = $.cookie("_ub");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify ub), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
@@ -287,8 +284,6 @@ function insertPageLoadTrk() {
 //	_cmc	Campaign Creative	Marketing asset 
 function createUbCookie() {
 	ub = new Object();
-	ub1 = new Object();
-	ub2 = new Object();
 	var dt = new Date;
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub._gi = gaCliendId;
@@ -296,13 +291,7 @@ function createUbCookie() {
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
-	ub1._gi = gaCliendId;
-	ub1._vi = trkSessId;
-	ub2._gi = gaCliendId;
-	ub2._vi = trkSessId;
 	ub._lg = new Array();
-	ub1._lg = new Array();
-	ub2._lg = new Array();
 	insertPageLoadTrk();
 }
 //Code to get the value of the client ID that google sets 
@@ -331,9 +320,10 @@ function initLocalTrack() {
 		}
     }
 }
+//beforeunload can detect page unloads 
 $(window).on('beforeunload', function(){
 	insertPageUnloadTrk();
-});
+	});
 $(document).ready(function(){
 	trkint = setInterval(initLocalTrack, 500);  
 });
