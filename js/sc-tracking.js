@@ -135,6 +135,7 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
+	createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
