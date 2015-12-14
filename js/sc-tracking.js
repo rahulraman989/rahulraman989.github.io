@@ -144,7 +144,7 @@ $('a').on('mousedown', function(e){
 	}
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -169,7 +169,7 @@ if ($('.bxslider li img').on('mousedown',function(e) {
      lgitem._hb = jQuery(this).attr("src"); 
 	 var lgitemstr = JSON.stringify(lgitem);
 	 ub._lg.push(lgitemstr);
-	 $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
 //Produt Category pages banner tracking
@@ -178,7 +178,7 @@ else if ($('#featured img').on('mousedown',function(e) {
      lgitem._pb = jQuery(this).attr("src"); 
 	 var lgitemstr = JSON.stringify(lgitem);
 	 ub._lg.push(lgitemstr);
-	 $.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
 function insertPageUnloadTrk() {
@@ -188,7 +188,7 @@ function insertPageUnloadTrk() {
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -233,7 +233,7 @@ function insertPageLoadTrk() {
     }
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7, path: '/' });
+	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
       function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
