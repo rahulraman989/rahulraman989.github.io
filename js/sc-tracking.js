@@ -135,7 +135,7 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
-	createUbCookie();
+	//createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
@@ -149,7 +149,7 @@ $('a').on('mousedown', function(e){
 	}
 	var lgitemstr = lgitem;
 	ub1._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub1), { expires: 7});
+	$.cookie('_ub', JSON.stringify(ub + "," + ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -166,7 +166,7 @@ $('a').on('mousedown', function(e){
 	//console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
+	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub + "," + ub1), 0);
 });
 
 
@@ -197,7 +197,7 @@ else if ($('#featured img').on('mousedown',function(e) {
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
 	ub2._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub2), { expires: 7});
+	$.cookie('_ub', JSON.stringify(ub + "," + ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -212,7 +212,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	var gc = $.cookie("_ub");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub + "," + ub2), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
