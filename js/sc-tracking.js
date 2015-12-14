@@ -135,15 +135,16 @@ function appendUbToBtn(){
 		}
 	});
 }
-$('a').on('mousedown', function(e){
+$('a').on('mousedown', function(e){ 
 	//createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
-	lgitem._gi = ub._gi;
-	lgitem._vi = ub._vi;
-	lgitem._el = $(this).attr('id');
+	lgitem._ub = ub;
+	//lgitem._gi = ub._gi;
+	//lgitem._vi = ub._vi;
+	//lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
 	//lgitem._is = $(this).attr('src');
 	lgitem._tg = Conversions.base32.encode(enTg);
@@ -197,8 +198,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	ub2._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
-	lgitem._gi = ub._gi;
-	lgitem._vi = ub._vi;
+	lgitem._ub = ub;
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
