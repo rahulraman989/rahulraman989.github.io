@@ -135,13 +135,15 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
-	createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
+	trkSessId = uniqId() + '-' + dt.getTime();
+	ub1._gi = gaCliendId;
+	ub1._vi = trkSessId;
 	//lgitem._is = $(this).attr('src');
 	lgitem._tg = Conversions.base32.encode(enTg);
 	if(jQuery(this).find('img').length) {
@@ -149,7 +151,7 @@ $('a').on('mousedown', function(e){
 	}
 	var lgitemstr = lgitem;
 	ub1._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub + "," + ub1), { expires: 7});
+	$.cookie('_ub', JSON.stringify(ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -166,7 +168,7 @@ $('a').on('mousedown', function(e){
 	//console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub + "," + ub1), 0);
+	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
 });
 
 
@@ -189,16 +191,18 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
    function insertPageUnloadTrk() {
-	   createUbCookie();
     ub2 = new Object();
 	ub2._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
+	trkSessId = uniqId() + '-' + dt.getTime();
+	ub2._gi = gaCliendId;
+	ub2._vi = trkSessId;
 	var lgitemstr = lgitem;
 	ub2._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub + "," + ub2), { expires: 7});
+	$.cookie('_ub', JSON.stringify(ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -213,7 +217,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	var gc = $.cookie("_ub");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub + "," + ub2), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
