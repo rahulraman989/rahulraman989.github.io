@@ -183,6 +183,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
+ /*
 function insertPageUnloadTrk() {
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
@@ -207,11 +208,14 @@ function insertPageUnloadTrk() {
 	logCookieData(_kv);
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
 }
+*/
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
 function insertPageLoadTrk() {
 	var lgitem = new Object();
 	lgitem._ac = 'ld';
+	loggedOutAt = new Date().getTime();
+    lgitem._tm = loggedOutAt - loggedInAt;
 	lgitem._cn = get_market() == undefined?'':get_market();
 	lgitem._se = getSegment();
 	lgitem._cp = Conversions.base32.encode(getPagePath());
@@ -321,9 +325,11 @@ function initLocalTrack() {
     }
 }
 //beforeunload can detect page unloads 
+/*
 $(window).on('beforeunload', function(){
 	insertPageUnloadTrk();
 	});
+*/
 $(document).ready(function(){
 	trkint = setInterval(initLocalTrack, 500);  
 });
