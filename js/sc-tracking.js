@@ -187,7 +187,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
-function insertPageUnloadTrk() 
+   function insertPageUnloadTrk() {
     ub2 = new Object();
 	ub2._lg = new Array();
 	var lgitem = new Object();
