@@ -135,6 +135,7 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
+    createUbCookie();
     ub1  = new Object();
 	ub1._lg1 = new Array();
 	var lgitem = new Object();
@@ -186,6 +187,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
 function insertPageUnloadTrk() {
+    createUbCookie();
     ub2  = new Object();
 	ub2._lg2 = new Array();
 	var lgitem = new Object();
@@ -215,6 +217,7 @@ function insertPageUnloadTrk() {
 //sendClickEventCall is the name of the function to send hits to GA
 function insertPageLoadTrk() {
 	var lgitem = new Object();
+	ub._lg = new Array();
 	lgitem._ac = 'ld';
 	lgitem._cn = get_market() == undefined?'':get_market();
 	lgitem._se = getSegment();
@@ -296,7 +299,6 @@ function createUbCookie() {
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
-	ub._lg = new Array();
 }
 
 //Code to get the value of the client ID that google sets 
