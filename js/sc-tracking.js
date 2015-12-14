@@ -2,7 +2,7 @@ var trkint;
 var ga;
 var gaCliendId;
 var trkSessId;
-var ub = [];
+var ub;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -142,6 +142,7 @@ $('a').on('mousedown', function(e){
 	if(jQuery(this).find('img').length) {
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
+	console.log(lgitem);
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
@@ -186,6 +187,7 @@ function insertPageUnloadTrk() {
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
+	console.log(lgitem);
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
@@ -231,6 +233,7 @@ function insertPageLoadTrk() {
 	  lgitem._cmc = itmobj['R'];
 	  lgitem._cmmc = mkt;
     }
+	console.log(lgitem);
 	var lgitemstr = JSON.stringify(lgitem);
 	ub._lg.push(lgitemstr);
 	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
