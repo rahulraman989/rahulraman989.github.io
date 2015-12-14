@@ -163,8 +163,6 @@ $('a').on('mousedown', function(e){
 	logCookieData(_kv);
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
-
-
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
@@ -282,6 +280,7 @@ function insertPageLoadTrk() {
 //	_cmcid	Campaign Creative ID	Unique Id for  particular marketing creative ie banner
 //	_cmmc	Campaign marketing category	Paid or Channel
 //	_cmc	Campaign Creative	Marketing asset 
+
 function createUbCookie() {
 	ub = new Object();
 	var dt = new Date;
@@ -292,8 +291,8 @@ function createUbCookie() {
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
 	ub._lg = new Array();
-	insertPageLoadTrk();
 }
+
 //Code to get the value of the client ID that google sets 
 //This client id is specific to a user 
 //Saving this will enable making a correlation between data collected in google analytics and data collected in our logging system 
@@ -317,6 +316,7 @@ function initLocalTrack() {
 		}
 		else {
 			createUbCookie();
+			insertPageLoadTrk();
 		}
     }
 }
