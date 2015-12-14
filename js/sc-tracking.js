@@ -140,6 +140,9 @@ $('a').on('mousedown', function(e){
 	ub1 = new Object();
 	ub1._gi = ub._gi;
 	ub1._vi = ub._vi;
+	ub1._re = ub._re;
+	ub1._de = ub._de;
+	ub1._br = ub._br;
 	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
@@ -152,7 +155,7 @@ $('a').on('mousedown', function(e){
 	}
 	var lgitemstr = lgitem;
 	ub1._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub1), { expires: 7});
+	$.cookie('_ev', JSON.stringify(ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -164,15 +167,13 @@ $('a').on('mousedown', function(e){
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub");
+	var gc = $.cookie("_ev");
 	console.log("***SLURP LOG CLICK***");
 	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
 });
-
-
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
@@ -194,8 +195,11 @@ else if ($('#featured img').on('mousedown',function(e) {
    function insertPageUnloadTrk() {
 	   //createUbCookie();
    	ub2 = new Object();
-   	ub2._gi = ub._gi;
-   	ub2._vi = ub._vi;
+	ub2._gi = ub._gi;
+	ub2._vi = ub._vi;
+	ub2._re = ub._re;
+	ub2._de = ub._de;
+	ub2._br = ub._br;
    	ub2._lg = new Array();
    	var lgitem = new Object();
 	lgitem._ac = 'ul';
@@ -205,7 +209,7 @@ else if ($('#featured img').on('mousedown',function(e) {
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
 	ub2._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub2), { expires: 7});
+	$.cookie('_ul', JSON.stringify(ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -217,7 +221,7 @@ else if ($('#featured img').on('mousedown',function(e) {
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub");
+	var gc = $.cookie("_ul");
 	console.log("***SLURP LOG UNLOAD***");
 	console.log(gc);
 	var _kv = { data : gc }
@@ -252,7 +256,7 @@ function insertPageLoadTrk() {
     }
 	var lgitemstr = lgitem;
 	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	$.cookie('_pv', JSON.stringify(ub), { expires: 7});
       function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -264,7 +268,7 @@ function insertPageLoadTrk() {
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub");
+	var gc = $.cookie("_pv");
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
@@ -326,8 +330,8 @@ function initLocalTrack() {
 				clearInterval(trkint);
 			}
 		}
-		if($.cookie('_ub')) {
-			var a = $.cookie('_ub');
+		if($.cookie('_pv')) {
+			var a = $.cookie('_pv');
 			ub = JSON.parse(a);
 			insertPageLoadTrk();
 		}
