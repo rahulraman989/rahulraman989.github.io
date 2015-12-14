@@ -165,8 +165,8 @@ $('a').on('mousedown', function(e){
       });
     }
 	var gc = $.cookie("_ub");
-	//console.log("SLURP LOG");
-	//console.log(gc);
+	console.log("***SLURP LOG CLICK***");
+	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
@@ -218,6 +218,8 @@ else if ($('#featured img').on('mousedown',function(e) {
       });
     }
 	var gc = $.cookie("_ub");
+	console.log("***SLURP LOG UNLOAD***");
+	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
