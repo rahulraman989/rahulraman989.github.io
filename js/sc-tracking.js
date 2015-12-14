@@ -4,11 +4,8 @@ var gaCliendId;
 var trkSessId;
 var ub;
 ub = new Object();
-var ub0;
 var ub1;
 var ub2;
-var ub3;
-var ub4;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -75,7 +72,7 @@ function getSegment(){
 	    "staff": "st"
     };
 if(s in _seg) 
-   return items[s];
+   return _seg[s];
 else 
    return "pe";
 }
@@ -93,7 +90,7 @@ function getUrlParams(){
 			  return '';
 		}
 	}
-} 
+}
 //Get the values for each of the URL parameters that have been extracted 
 function getUrlParamVal(p) {
     var sPageURL = String(document.location).split('?')[1];
@@ -108,6 +105,34 @@ function getUrlParamVal(p) {
         }
     }
 }
+function getTrafficSource(){
+	var _ref = document.referrer;
+	if (getUrlParams() == "") {
+	if (_ref.toLowerCase().indexOf("google")>-1) {
+		return "go"
+	}
+	else if (_ref.toLowerCase().indexOf("yahoo")>-1) {
+		return "yo"
+	}
+	else if (_ref.toLowerCase().indexOf("bing")>-1) {
+		return "bn"
+	}
+	else if (_ref.toLowerCase().indexOf("baidu")>-1) {
+		return "bd"
+	}
+	else if (_ref == "") {
+		return "direct"
+	}
+  }
+  else {
+	  var c = getUrlParamVal('camp_id');
+	  var gclid = getUrlParamVal('gclid');
+	  if (c!=undefined || c!=="")
+		  return "cmp";
+		  else if (gclid!=undefined || gclid!=="")
+			  return "gcpc";
+     }
+} 
 //Random generated 64 bit UUID which is the visitor ID and it will remain constant per user. This will help identify new and returning users 
 function uniqId() {
   function uid() { 
@@ -314,6 +339,7 @@ function createUbCookie() {
 	ub._re = Conversions.base32.encode(String(document.referrer));
 	ub._de = deviceInfo();
 	ub._br = navigator.getAgent;
+	ub._ts = getTrafficSource();
 	ub._lg = new Array();
 	insertPageLoadTrk();
 }
