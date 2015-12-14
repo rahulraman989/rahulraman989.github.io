@@ -114,27 +114,6 @@ function uniqId() {
     }
   return uid() + uid() + '-' + uid() + '-' + uid() + '-' + uid() + '-' + uid() + uid() + uid();
 }
-//Function to get the cookie on the whole and pass it to the forms platform onclick of "Apply Now"
-//The cookie is passed onto the forms in the form of a URL query parameter
-// As the form loads, the parameter will be saved into the XSD
-function appendUbToBtn(){
-	if($.cookie('_ub'))
-		ubparam = '_ub='+$.cookie('_ub');
-	else
-		ubparam = '';
-	//alert(ubparam)
-	$('a[href]').each(function () {
-		if($(this).html().toLowerCase()==="apply now") {
-		  var old_href_value= $(this).attr('href');
-		  var link_has_querystring = old_href_value.indexOf("?");
-		  if(link_has_querystring!==-1) {
-			$(this).attr('href',old_href_value +'&' + window.location.search.substr(1)+ubparam);
-		  } else {
-			$(this).attr('href',old_href_value+"?"+window.location.search.substr(1)+ubparam);
-		   }
-		}
-	});
-}
 $('a').on('mousedown', function(e){ 
 	//createUbCookie();
 	ub1 = new Object();
@@ -172,25 +151,39 @@ $('a').on('mousedown', function(e){
 	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
+	sendClickEventCall('track_element', 'user_behaviour_events', JSON.stringify(ub1), 0);
 });
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
+	 ub3 = new Object();
+	 ub3._gi = ub._gi;
+	 ub3._vi = ub._vi;
+	 ub3._re = ub._re;
+	 ub3._de = ub._de;
+	 ub3._br = ub._br;
+	 ub3._lg = new Array();
      var lgitem = new Object();
      lgitem._hb = jQuery(this).attr("src"); 
 	 var lgitemstr = JSON.stringify(lgitem);
-	 ub._lg.push(lgitemstr);
-	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
-	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+	 ub3._lg.push(lgitemstr);
+	 $.cookie('_ev', JSON.stringify(ub3), { expires: 7});
+	 sendClickEventCall('track_element', 'user_behaviour_events', JSON.stringify(ub3), 0);
    }));
 //Produt Category pages banner tracking
 else if ($('#featured img').on('mousedown',function(e) {
+     ub4 = new Object();
+     ub4._gi = ub._gi;
+     ub4._vi = ub._vi;
+     ub4._re = ub._re;
+     ub4._de = ub._de;
+     ub4._br = ub._br;
+     ub4._lg = new Array();
      var lgitem = new Object();
      lgitem._pb = jQuery(this).attr("src"); 
 	 var lgitemstr = JSON.stringify(lgitem);
-	 ub._lg.push(lgitemstr);
-	 $.cookie('_ub', JSON.stringify(ub), { expires: 7});
-	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+	 ub4._lg.push(lgitemstr);
+	 $.cookie('_ev', JSON.stringify(ub4), { expires: 7});
+	 sendClickEventCall('track_element', 'user_behaviour_events', JSON.stringify(ub4), 0);
    }));
    function insertPageUnloadTrk() {
 	   //createUbCookie();
@@ -226,11 +219,18 @@ else if ($('#featured img').on('mousedown',function(e) {
 	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
+	sendClickEventCall('track_element', 'user_behaviour_unload', JSON.stringify(ub2), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
 function insertPageLoadTrk() {
+    ub0 = new Object();
+    ub0._gi = ub._gi;
+    ub0._vi = ub._vi;
+    ub0._re = ub._re;
+    ub0._de = ub._de;
+    ub0._br = ub._br;
+    ub0._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ld';
 	lgitem._cn = get_market() == undefined?'':get_market();
@@ -255,8 +255,8 @@ function insertPageLoadTrk() {
 	  lgitem._cmmc = mkt;
     }
 	var lgitemstr = lgitem;
-	ub._lg.push(lgitemstr);
-	$.cookie('_pv', JSON.stringify(ub), { expires: 7});
+	ub0._lg.push(lgitemstr);
+	$.cookie('_pv', JSON.stringify(ub0), { expires: 7});
       function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -271,7 +271,7 @@ function insertPageLoadTrk() {
 	var gc = $.cookie("_pv");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
+	sendClickEventCall('track_element', 'user_behaviour_page_view', JSON.stringify(ub0), 0);
 }
 //Function logic where the cookie is created 
 // Names of JSON key value pairs that are stored in the cookie explained below: 
