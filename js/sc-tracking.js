@@ -157,6 +157,7 @@ $('a').on('mousedown', function(e){
       });
     }
 	var gc = $.cookie("_ub");
+	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
