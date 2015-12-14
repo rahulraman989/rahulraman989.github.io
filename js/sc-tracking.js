@@ -135,6 +135,7 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
+    ub1  = new Object();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
@@ -184,6 +185,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
 function insertPageUnloadTrk() {
+    ub2  = new Object();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
