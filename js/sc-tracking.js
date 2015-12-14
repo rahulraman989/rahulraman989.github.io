@@ -3,6 +3,9 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
+var gv;
+var gcval;
+var cs;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
@@ -157,14 +160,12 @@ $('a').on('mousedown', function(e){
       });
     }
 	var gc = $.cookie("_ub");
-	console.log("SLURP LOG");
-	console.log(gc);
+	//console.log("SLURP LOG");
+	//console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
 });
-
-
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
      var lgitem = new Object();
@@ -235,7 +236,17 @@ function insertPageLoadTrk() {
     }
 	var lgitemstr = lgitem;
 	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	gv = $.cookie("_ub");
+	function getByteSize(s) {
+      return encodeURIComponent('<q></q>' + s).length;
+    }
+	cs = getByteSize(gv);
+	if (cs>=3000) {
+	  $.cookie('_ub1', JSON.stringify(ub), { expires: 7});
+	}
+	else {
+	  $.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	}
       function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -247,8 +258,13 @@ function insertPageLoadTrk() {
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub");
-	var _kv = { data : gc }
+	if (cs>=3000) {
+	   gcval = $.cookie("_ub1");
+	}
+	else {
+	  gcval = $.cookie("_ub");
+	}
+	var _kv = { data : gcval }
 	logCookieData(_kv);
 	sendClickEventCall('page_load', 'user_behaviour', JSON.stringify(ub), 0);
 }
