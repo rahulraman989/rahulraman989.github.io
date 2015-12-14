@@ -157,6 +157,7 @@ $('a').on('mousedown', function(e){
       });
     }
 	var gc = $.cookie("_ub");
+	console.log("SLURP LOG");
 	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
