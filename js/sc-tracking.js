@@ -144,7 +144,7 @@ $('a').on('mousedown', function(e){
 	lgitem._ub = ub;
 	//lgitem._gi = ub._gi;
 	//lgitem._vi = ub._vi;
-	//lgitem._el = $(this).attr('id');
+	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
 	//lgitem._is = $(this).attr('src');
 	lgitem._tg = Conversions.base32.encode(enTg);
