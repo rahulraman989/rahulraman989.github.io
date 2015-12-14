@@ -141,9 +141,8 @@ $('a').on('mousedown', function(e){
 	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
-	lgitem._ub = ub;
-	//lgitem._gi = ub._gi;
-	//lgitem._vi = ub._vi;
+	lgitem._gi = ub._gi;
+	lgitem._vi = ub._vi;
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
 	//lgitem._is = $(this).attr('src');
@@ -198,7 +197,8 @@ else if ($('#featured img').on('mousedown',function(e) {
 	ub2._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'ul';
-	lgitem._ub = ub;
+	lgitem._gi = ub._gi;
+	lgitem._vi = ub._vi;
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
