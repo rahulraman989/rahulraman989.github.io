@@ -3,6 +3,8 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
+var ub1;
+var ub2;
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
