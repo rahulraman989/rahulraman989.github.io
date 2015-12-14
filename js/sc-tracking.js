@@ -165,7 +165,7 @@ $('a').on('mousedown', function(e){
 	console.log(gc);
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
+	sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub1), 0);
 });
 //Home Page Banner clicks 
 if ($('.bxslider li img').on('mousedown',function(e) {
@@ -209,7 +209,7 @@ function insertPageUnloadTrk() {
 	var gc = $.cookie("_ub2");
 	var _kv = { data : gc }
 	logCookieData(_kv);
-	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
+	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub2), 0);
 }
 //Caling the function to send an event hit to GA on every page load 
 //sendClickEventCall is the name of the function to send hits to GA
