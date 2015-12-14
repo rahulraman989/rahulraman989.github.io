@@ -138,11 +138,11 @@ function appendUbToBtn(){
 $('a').on('mousedown', function(e){ 
 	//createUbCookie();
 	ub1 = new Object();
+	ub1._gi = ub._gi;
+	ub1._vi = ub._vi;
 	ub1._lg = new Array();
 	var lgitem = new Object();
 	lgitem._ac = 'cl';
-	lgitem._gi = ub._gi;
-	lgitem._vi = ub._vi;
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
 	//lgitem._is = $(this).attr('src');
@@ -193,9 +193,11 @@ else if ($('#featured img').on('mousedown',function(e) {
    }));
    function insertPageUnloadTrk() {
 	   //createUbCookie();
-    ub2 = new Object();
-	ub2._lg = new Array();
-	var lgitem = new Object();
+   	ub2 = new Object();
+   	ub2._gi = ub._gi;
+   	ub2._vi = ub._vi;
+   	ub2._lg = new Array();
+   	var lgitem = new Object();
 	lgitem._ac = 'ul';
 	lgitem._gi = ub._gi;
 	lgitem._vi = ub._vi;
