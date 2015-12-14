@@ -143,8 +143,8 @@ $('a').on('mousedown', function(e){
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = lgitem;
-	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	ub1._lg.push(lgitemstr);
+	$.cookie('_ub1', JSON.stringify(ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -156,7 +156,7 @@ $('a').on('mousedown', function(e){
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub");
+	var gc = $.cookie("_ub1");
 	console.log("SLURP LOG");
 	console.log(gc);
 	var _kv = { data : gc }
@@ -187,8 +187,8 @@ function insertPageUnloadTrk() {
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
-	ub._lg.push(lgitemstr);
-	$.cookie('_ub', JSON.stringify(ub), { expires: 7});
+	ub2._lg.push(lgitemstr);
+	$.cookie('_ub2', JSON.stringify(ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
       $.ajax({
@@ -200,7 +200,7 @@ function insertPageUnloadTrk() {
        dataType: 'json'
       });
     }
-	var gc = $.cookie("_ub");
+	var gc = $.cookie("_ub2");
 	var _kv = { data : gc }
 	logCookieData(_kv);
 	sendClickEventCall('page_unload', 'user_behaviour', JSON.stringify(ub), 0);
