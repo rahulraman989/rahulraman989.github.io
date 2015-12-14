@@ -145,7 +145,7 @@ $('a').on('mousedown', function(e){
 	 	lgitem._is = jQuery(this).find('img').attr("src");
 	}
 	var lgitemstr = lgitem;
-	ub1._lg.push(lgitemstr);
+	ub1._lg1.push(lgitemstr);
 	$.cookie('_ub1', JSON.stringify(ub1), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
@@ -192,7 +192,7 @@ function insertPageUnloadTrk() {
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
 	var lgitemstr = lgitem;
-	ub2._lg.push(lgitemstr);
+	ub2._lg2.push(lgitemstr);
 	$.cookie('_ub2', JSON.stringify(ub2), { expires: 7});
 	function logCookieData(obj){ 
       var data=JSON.stringify (obj);
@@ -299,10 +299,10 @@ function createUbCookie() {
 	ub._lg = new Array();
 	ub1._gi = gaCliendId;
 	ub1._vi = trkSessId;
-	ub1._lg = new Array();
+	ub1._lg1 = new Array();
 	ub2._gi = gaCliendId;
 	ub2._vi = trkSessId;
-	ub2._lg = new Array();
+	ub2._lg2 = new Array();
 	insertPageLoadTrk();
 }
 //Code to get the value of the client ID that google sets 
