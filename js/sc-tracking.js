@@ -3,6 +3,7 @@ var ga;
 var gaCliendId;
 var trkSessId;
 var ub;
+ub = new Object();
 var ub1;
 var ub2;
 var loggedInAt;
@@ -135,7 +136,7 @@ function appendUbToBtn(){
 	});
 }
 $('a').on('mousedown', function(e){
-	createUbCookie();
+	//createUbCookie();
 	ub1 = new Object();
 	ub1._lg = new Array();
 	var lgitem = new Object();
@@ -191,7 +192,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	 sendClickEventCall('track_element', 'user_behaviour', JSON.stringify(ub), 0);
    }));
    function insertPageUnloadTrk() {
-	   createUbCookie();
+	   //createUbCookie();
     ub2 = new Object();
 	ub2._lg = new Array();
 	var lgitem = new Object();
@@ -295,7 +296,6 @@ function insertPageLoadTrk() {
 //	_cmmc	Campaign marketing category	Paid or Channel
 //	_cmc	Campaign Creative	Marketing asset 
 function createUbCookie() {
-	ub = new Object();
 	var dt = new Date;
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub._gi = gaCliendId;
