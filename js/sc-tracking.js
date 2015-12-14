@@ -141,6 +141,7 @@ $('a').on('mousedown', function(e){
 	lgitem._ac = 'cl';
 	lgitem._el = $(this).attr('id');
 	var enTg = $(this).attr('href');
+	var dt = new Date;
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub1._gi = gaCliendId;
 	ub1._vi = trkSessId;
@@ -197,6 +198,7 @@ else if ($('#featured img').on('mousedown',function(e) {
 	lgitem._ac = 'ul';
 	loggedOutAt = new Date().getTime();
     lgitem._tm = loggedOutAt - loggedInAt;
+	var dt = new Date;
 	trkSessId = uniqId() + '-' + dt.getTime();
 	ub2._gi = gaCliendId;
 	ub2._vi = trkSessId;
