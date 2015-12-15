@@ -16,6 +16,9 @@ var ub;
 ub = new Object();
 var ub1;
 var ub2;
+var ub0;
+var ub3;
+
 var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
