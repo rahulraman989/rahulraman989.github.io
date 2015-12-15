@@ -8,123 +8,7 @@ var i, len;
 var cID;
 var q;
 var ampExists;
-
-
-
-//Function to identify page name 
-function get_pagename()
-{
-	var current_page = decodeURIComponent(current_url.split("/").pop().split(".")[0]);
-
-	if (current_page == '' || current_page == null)
-	{
-		final_page = decodeURIComponent(current_url.split("/").slice(-2, -1)[0]);
-	}
-	else if (current_page == 'index')
-	{
-		final_page = decodeURIComponent(current_url.split("/").slice(-2, -1));
-	}
-	else
-	{
-		final_page = current_page;
-	}
-
-	return final_page;
-}
-//Function to trim characters from page title
-function trim_chars(str){
-
-	var chars_arr = ["�","-","|"];
-
-	for(var i=0; i<chars_arr.length; i++){
-		if(str.indexOf(chars_arr[i])>=0)
-  			str = str.substr(0,str.indexOf(chars_arr[i])-1);
-	}
-	
-  	return str.trim();
-  			
-}
-//Function to get image src as name for each user interaction on the page
-function trim_img_name(imgsrc){
-
-	if(imgsrc.lastIndexOf("/")>=0)
-		imgsrc = imgsrc.substr(imgsrc.lastIndexOf("/")+1, imgsrc.length);
-
-	return imgsrc.trim();
-
-}
-//Function to get element class for each user interaction on the page
-function get_element_class(This){
-
-	var elmCls = '';
-	if(jQuery(This).attr("class")){
-		elmCls = jQuery(This).attr("class");
-		if(elmCls != undefined || elmCls != '')
-			return elmCls.trim();
-	}
-
-	return elmCls;
-}
-//Function to get element Id for each user interaction on the page
-function get_element_id(This){
-
-	var elmId = '';
-	if(jQuery(This).attr("id")){
-		elmId = jQuery(This).attr("id");
-		if(elmId != undefined || elmId != '')
-			return elmId.trim();
-	}
-
-	return elmId;
-
-}
-//Function to get class/id for event user interaction on the page
-function get_classid_for_eaction(This){
-
-	var elm_cls = get_element_class(This);
-	var elm_id = get_element_id(This);
-	var cls_id = '';
-	if(elm_cls !== "" && elm_id !== "")
-		cls_id = '&' + elm_cls.replace(/\s+/g, ", ") + ' : #' + elm_id + ' : ';
-	else if(elm_cls !== "")
-		cls_id = '&' + elm_cls.replace(/\s+/g, ", ") + ' : ';
-	else if(elm_id !== "")
-		cls_id = '#' + elm_id + ' : ';	
-
-	return cls_id;	
-}
-
-//Identify mouse left/right click
-function typeofMouseClick(t) {
-	var isTranslated = "";
-	if (jQuery('html').hasClass('translated-ltr') || jQuery('html').hasClass('translated-rtl')) {
-		isTranslated = " : _Translated";
-	}
-	if (t === 2) {
-		return "*MiddleClick" + isTranslated;
-	}
-	if (t === 3) {
-		return "*RightClick" + isTranslated;
-	}
-	return "*LeftClick" + isTranslated;
-}
-
-if (typeof String.prototype.trim !== 'function') {
-	String.prototype.trim = function() {
-		return this.replace(/^\s+|\s+$/g, '');
-	};
-}
-if (!window.location.origin) {
-	window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-}
-//The document.ready contains code to individually listen to clicks on pintiles, banners and buttons that are within <img> tags. 
-//These cannot be tracked by the generic code written at the start since the structure of the DOM is such. 
-//For example not all buttons have an a[href] tag to make it generic. 
-//Neither do all images and pintiles have an id that starts with pin_ or btn_ or cta_. There is a lot of variation in different markets
-(function($) {
-	$(document).ready(function() {
-		//Identify Page Type 
-		var trkint;
+var trkint;
 var ga;
 var gaCliendId;
 var trkSessId;
@@ -136,7 +20,6 @@ var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
 loggedInAt = new Date().getTime(); 
-var trackers = ga.getAll();
 var mktar=new Array;
 //All upper case charactrers being made to lower case to avoid a mixture of both in the GA UI. This will also help in data stadardization
 String.prototype.toTitleCase = function() {
@@ -236,11 +119,7 @@ function get_market()
 	var host = window.location.host;
 	var market;
 	var parseURL;
-	if (host == 'www.sc.com')
-	{
-		market = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-	}
-	else if((host == 'online.forms.standardchartered.com' || host == 'forms.online.standardchartered.com') 
+	if((host == 'online.forms.standardchartered.com' || host == 'forms.online.standardchartered.com') 
 			&& window.location.pathname.indexOf('/public_website/')>=0)
 	{
 		market = get_market_in_onlineform();
@@ -257,6 +136,9 @@ function get_market()
 	{
 		market = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
 		if(market == 'nfsafr')market = 'ng';
+	}
+	else {
+	market = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
 	}
 	return market;
 }
@@ -636,7 +518,7 @@ function initLocalTrack() {
 		var trackers = ga.getAll();
 		var i, len;
 		for (i = 0, len = trackers.length; i < len; i += 1) {
-			if (trackers[i].get('trackingId') ==="UA-46697978-2") {
+			if (trackers[i].get('trackingId') ==="UA-46697978-1") {
 				gaCliendId  = trackers[i].get('clientId');
 				clearInterval(trkint);
 			}
@@ -656,6 +538,121 @@ $(window).on('beforeunload', function(){
 	insertPageUnloadTrk();
 	});
 }
+
+
+//Function to identify page name 
+function get_pagename()
+{
+	var current_page = decodeURIComponent(current_url.split("/").pop().split(".")[0]);
+
+	if (current_page == '' || current_page == null)
+	{
+		final_page = decodeURIComponent(current_url.split("/").slice(-2, -1)[0]);
+	}
+	else if (current_page == 'index')
+	{
+		final_page = decodeURIComponent(current_url.split("/").slice(-2, -1));
+	}
+	else
+	{
+		final_page = current_page;
+	}
+
+	return final_page;
+}
+//Function to trim characters from page title
+function trim_chars(str){
+
+	var chars_arr = ["�","-","|"];
+
+	for(var i=0; i<chars_arr.length; i++){
+		if(str.indexOf(chars_arr[i])>=0)
+  			str = str.substr(0,str.indexOf(chars_arr[i])-1);
+	}
+	
+  	return str.trim();
+  			
+}
+//Function to get image src as name for each user interaction on the page
+function trim_img_name(imgsrc){
+
+	if(imgsrc.lastIndexOf("/")>=0)
+		imgsrc = imgsrc.substr(imgsrc.lastIndexOf("/")+1, imgsrc.length);
+
+	return imgsrc.trim();
+
+}
+//Function to get element class for each user interaction on the page
+function get_element_class(This){
+
+	var elmCls = '';
+	if(jQuery(This).attr("class")){
+		elmCls = jQuery(This).attr("class");
+		if(elmCls != undefined || elmCls != '')
+			return elmCls.trim();
+	}
+
+	return elmCls;
+}
+//Function to get element Id for each user interaction on the page
+function get_element_id(This){
+
+	var elmId = '';
+	if(jQuery(This).attr("id")){
+		elmId = jQuery(This).attr("id");
+		if(elmId != undefined || elmId != '')
+			return elmId.trim();
+	}
+
+	return elmId;
+
+}
+//Function to get class/id for event user interaction on the page
+function get_classid_for_eaction(This){
+
+	var elm_cls = get_element_class(This);
+	var elm_id = get_element_id(This);
+	var cls_id = '';
+	if(elm_cls !== "" && elm_id !== "")
+		cls_id = '&' + elm_cls.replace(/\s+/g, ", ") + ' : #' + elm_id + ' : ';
+	else if(elm_cls !== "")
+		cls_id = '&' + elm_cls.replace(/\s+/g, ", ") + ' : ';
+	else if(elm_id !== "")
+		cls_id = '#' + elm_id + ' : ';	
+
+	return cls_id;	
+}
+
+//Identify mouse left/right click
+function typeofMouseClick(t) {
+	var isTranslated = "";
+	if (jQuery('html').hasClass('translated-ltr') || jQuery('html').hasClass('translated-rtl')) {
+		isTranslated = " : _Translated";
+	}
+	if (t === 2) {
+		return "*MiddleClick" + isTranslated;
+	}
+	if (t === 3) {
+		return "*RightClick" + isTranslated;
+	}
+	return "*LeftClick" + isTranslated;
+}
+
+if (typeof String.prototype.trim !== 'function') {
+	String.prototype.trim = function() {
+		return this.replace(/^\s+|\s+$/g, '');
+	};
+}
+if (!window.location.origin) {
+	window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+}
+//The document.ready contains code to individually listen to clicks on pintiles, banners and buttons that are within <img> tags. 
+//These cannot be tracked by the generic code written at the start since the structure of the DOM is such. 
+//For example not all buttons have an a[href] tag to make it generic. 
+//Neither do all images and pintiles have an id that starts with pin_ or btn_ or cta_. There is a lot of variation in different markets
+(function($) {
+	$(document).ready(function() {
+		//Identify Page Type 
         trkint = setInterval(initLocalTrack, 500);
 		var page = get_pagename();
 		var market = get_market();
