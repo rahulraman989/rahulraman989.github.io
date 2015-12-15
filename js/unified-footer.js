@@ -4,7 +4,6 @@ var current_url = window.location.href;
 var debugConsole = true;
 var eventName = "track_element";
 var href = "";
-var trackers = ga.getAll();
 var i, len;
 var cID;
 var q;
@@ -137,6 +136,7 @@ var loggedInAt;
 var loggedOutAt;
 var totalTimeSpent;
 loggedInAt = new Date().getTime(); 
+var trackers = ga.getAll();
 var mktar=new Array;
 //All upper case charactrers being made to lower case to avoid a mixture of both in the GA UI. This will also help in data stadardization
 String.prototype.toTitleCase = function() {
