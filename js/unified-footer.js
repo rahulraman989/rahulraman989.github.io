@@ -9,8 +9,6 @@ var cID;
 var q;
 var ampExists;
 var trkint;
-var ga;
-var gaCliendId;
 var trkSessId;
 var ub;
 ub = new Object();
