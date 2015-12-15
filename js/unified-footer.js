@@ -142,6 +142,19 @@ function get_market()
 	}
 	return market;
 }
+	function initLocalTrack() {
+			if($.cookie('_pv')) {
+				var a = $.cookie('_pv');
+				ub = JSON.parse(a);
+				insertPageLoadTrk();
+			}
+			else {
+				createUbCookie();
+			}
+}
+
+initLocalTrack();
+
 	mktar["P"]="Paid";mktar["O"]="Owned";mktar["E"]="Earned"
 	var chnar=new Array;chnar["B"]="Banner Display";chnar["E"]="Email / EDM";chnar["S"]="Search";chnar["O"]="SEO";chnar["TCH"]="TestChannel";chnar["NA"]="Not Applicable";chnar["FBA"]="Facebook";chnar["NMG"]="NationMedia";chnar["FED"]="SocialFeed";chnar["LIN"]="LINE";chnar["MOB"]="Mobile";chnar["CFM"]="CapitalFM";chnar["YUT"]="YouTube";chnar["GOO"]="Google";chnar["DQA"]="DQA";chnar["GOG"]="Google";chnar["DMO"]="DailyMonitor";chnar["YOT"]="YouTube";chnar["SPH"]="StraitsTimes";chnar["DIG"]="OnlineDigital";chnar["BRS"]="Broadsheet";chnar["BT."]="Businesstimes";chnar["ASO"]="Asiaone";chnar["GVC"]="GoldenVillage";chnar["Yah"]="Yahoo";chnar["BLS"]="BlisMedia";chnar["Goa"]="Goal.com";chnar["SCW"]="Soccerway.com";chnar["RTB"]="RealTimeBidding";chnar["LPP"]="LinkfromPromoPage";chnar["OBL"]="OnlineBankinglogin";chnar["SHW"]="Shaw";chnar["SPP"]="SponsoredPost";chnar["OOH"]="OOH";chnar["SDW"]="SocialDealwebsite";chnar["SDN"]="SocialDealeNewsletter";chnar["ADN"]="Adnear"
 	var schnar=new Array;
@@ -510,17 +523,6 @@ function get_market()
 	//Code to get the value of the client ID that google sets 
 	//This client id is specific to a user 
 	//Saving this will enable making a correlation between data collected in google analytics and data collected in our logging system 
-	function initLocalTrack() {
-			if($.cookie('_pv')) {
-				var a = $.cookie('_pv');
-				ub = JSON.parse(a);
-				insertPageLoadTrk();
-			}
-			else {
-				createUbCookie();
-			}
-}
-initLocalTrack();
 	//beforeunload can detect page unloads 
 	$(window).on('beforeunload', function(){
 		insertPageUnloadTrk();
