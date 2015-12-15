@@ -163,7 +163,117 @@ function get_market()
 	}
 	return market;
 }
-	function initLocalTrack() {
+   //Get the device type (mobile or desktop)
+function deviceInfo() {
+	if (/Mobi/.test(navigator.userAgent))
+	    return "m";
+	else
+		return "d";
+}
+//Get the browser and browser version that the user is on
+navigator.getAgent= (function(){
+    var N= navigator.appName, ua= navigator.userAgent, tem;
+    var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+    M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
+	if (M[0].toLowerCase().indexOf("firefox")>-1)
+		return 'f' + "-" + M[1];
+	else if(M[0].toLowerCase().indexOf("chrome")>-1)
+		return 'c' + "-" + M[1];
+	else if(M[0].toLowerCase().indexOf("safari")>-1)
+		return 's' + "-" + M[1];
+	else if(M[0].toLowerCase().indexOf("msie")>-1)
+		return 'i' + "-" + M[1];
+	else
+		return M[0] + "-" + M[1];
+	})();
+// Get the segment within the sc.com website 
+// Segments can be the following : Personal, Priority and SME
+// Short names for each of the segments parsed from the URL
+function getSegment(){
+	var s = String(document.location).split('/')[4];
+	var _seg = {
+        "priority" : "pr",
+        "business-banking-sme" : "bs",
+        "saadiq" : "sq",
+        "rmb" : "rm",
+        "en" : "pv",
+	    "nri" : "ni",
+	    "employee-banking": "eb",
+	    "staff": "st"
+    };
+if(s in _seg) 
+   return _seg[s];
+else 
+   return "pe";
+}
+// Get the list of all URL parameters from the URL
+function getUrlParams(){
+	var l = String(document.location);
+	if(l.indexOf('#') > -1){
+		return l.split('#')[1];
+	}
+	else {
+		if(l.indexOf('?') > -1){
+		  return l.split('?')[1];
+		}
+		else {
+			  return '';
+		}
+	}
+}
+//Get the values for each of the URL parameters that have been extracted 
+function getUrlParamVal(p) {
+    var sPageURL = String(document.location).split('?')[1];
+	if(sPageURL == undefined)
+	    return '';
+	sURLVariables = sPageURL.split('&')
+	var sParameterName, i;
+	for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === p) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
+function getTrafficSource(){
+	var _ref = document.referrer;
+	if (getUrlParams() == "") {
+	if (_ref.toLowerCase().indexOf("google")>-1) {
+		return "go"
+	}
+	else if (_ref.toLowerCase().indexOf("yahoo")>-1) {
+		return "yo"
+	}
+	else if (_ref.toLowerCase().indexOf("bing")>-1) {
+		return "bn"
+	}
+	else if (_ref.toLowerCase().indexOf("baidu")>-1) {
+		return "bd"
+	}
+	else if (_ref == "") {
+		return "direct"
+	}
+  }
+  else {
+	  var c = getUrlParamVal('camp_id');
+	  var gclid = getUrlParamVal('gclid');
+	  if (c!=undefined || c!=="")
+		  return "cmp";
+		  else if (gclid!=undefined || gclid!=="")
+			  return "gcpc";
+    }
+} 
+//Random generated 64 bit UUID which is the visitor ID and it will remain constant per user. This will help identify new and returning users 
+function uniqId() {
+  function uid() { 
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+    }
+  return uid() + uid() + '-' + uid() + '-' + uid() + '-' + uid() + '-' + uid() + uid() + uid();
+}
+function initLocalTrack() {
 			if($.cookie('_pv')) {
 				var a = $.cookie('_pv');
 				ub = JSON.parse(a);
@@ -175,117 +285,8 @@ function get_market()
 }
 
 initLocalTrack();
-	   //Get the device type (mobile or desktop)
-	function deviceInfo() {
-		if (/Mobi/.test(navigator.userAgent))
-		    return "m";
-		else
-			return "d";
-	}
-	//Get the browser and browser version that the user is on
-	navigator.getAgent= (function(){
-	    var N= navigator.appName, ua= navigator.userAgent, tem;
-	    var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
-	    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
-	    M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
-		if (M[0].toLowerCase().indexOf("firefox")>-1)
-			return 'f' + "-" + M[1];
-		else if(M[0].toLowerCase().indexOf("chrome")>-1)
-			return 'c' + "-" + M[1];
-		else if(M[0].toLowerCase().indexOf("safari")>-1)
-			return 's' + "-" + M[1];
-		else if(M[0].toLowerCase().indexOf("msie")>-1)
-			return 'i' + "-" + M[1];
-		else
-			return M[0] + "-" + M[1];
-		})();
-	// Get the segment within the sc.com website 
-	// Segments can be the following : Personal, Priority and SME
-	// Short names for each of the segments parsed from the URL
-	function getSegment(){
-		var s = String(document.location).split('/')[4];
-		var _seg = {
-	        "priority" : "pr",
-	        "business-banking-sme" : "bs",
-	        "saadiq" : "sq",
-	        "rmb" : "rm",
-	        "en" : "pv",
-		    "nri" : "ni",
-		    "employee-banking": "eb",
-		    "staff": "st"
-	    };
-	if(s in _seg) 
-	   return _seg[s];
-	else 
-	   return "pe";
-	}
-	// Get the list of all URL parameters from the URL
-	function getUrlParams(){
-		var l = String(document.location);
-		if(l.indexOf('#') > -1){
-			return l.split('#')[1];
-		}
-		else {
-			if(l.indexOf('?') > -1){
-			  return l.split('?')[1];
-			}
-			else {
-				  return '';
-			}
-		}
-	}
-	//Get the values for each of the URL parameters that have been extracted 
-	function getUrlParamVal(p) {
-	    var sPageURL = String(document.location).split('?')[1];
-		if(sPageURL == undefined)
-		    return '';
-		sURLVariables = sPageURL.split('&')
-		var sParameterName, i;
-		for (i = 0; i < sURLVariables.length; i++) {
-	        sParameterName = sURLVariables[i].split('=');
-	        if (sParameterName[0] === p) {
-	            return sParameterName[1] === undefined ? true : sParameterName[1];
-	        }
-	    }
-	}
-	function getTrafficSource(){
-		var _ref = document.referrer;
-		if (getUrlParams() == "") {
-		if (_ref.toLowerCase().indexOf("google")>-1) {
-			return "go"
-		}
-		else if (_ref.toLowerCase().indexOf("yahoo")>-1) {
-			return "yo"
-		}
-		else if (_ref.toLowerCase().indexOf("bing")>-1) {
-			return "bn"
-		}
-		else if (_ref.toLowerCase().indexOf("baidu")>-1) {
-			return "bd"
-		}
-		else if (_ref == "") {
-			return "direct"
-		}
-	  }
-	  else {
-		  var c = getUrlParamVal('camp_id');
-		  var gclid = getUrlParamVal('gclid');
-		  if (c!=undefined || c!=="")
-			  return "cmp";
-			  else if (gclid!=undefined || gclid!=="")
-				  return "gcpc";
-	    }
-	} 
-	//Random generated 64 bit UUID which is the visitor ID and it will remain constant per user. This will help identify new and returning users 
-	function uniqId() {
-	  function uid() { 
-	    return Math.floor((1 + Math.random()) * 0x10000)
-	      .toString(16)
-	      .substring(1);
-	    }
-	  return uid() + uid() + '-' + uid() + '-' + uid() + '-' + uid() + '-' + uid() + uid() + uid();
-	}
-	if (get_market() == "ke" || get_market() == "kenya") {
+
+	//if (get_market() == "ke" || get_market() == "kenya") {
 	$('a').on('mousedown', function(e){ 
 		//createUbCookie();
 		ub1 = new Object();
@@ -526,7 +527,7 @@ initLocalTrack();
 	$(window).on('beforeunload', function(){
 		insertPageUnloadTrk();
 		});
-}
+//}
 //Function to identify page name 
 function get_pagename()
 {
