@@ -539,7 +539,6 @@ $(window).on('beforeunload', function(){
 	});
 }
 
-
 //Function to identify page name 
 function get_pagename()
 {
@@ -653,7 +652,7 @@ if (!window.location.origin) {
 (function($) {
 	$(document).ready(function() {
 		//Identify Page Type 
-        trkint = setInterval(initLocalTrack, 500);
+        //trkint = setInterval(initLocalTrack, 500);
 		var page = get_pagename();
 		var market = get_market();
 
