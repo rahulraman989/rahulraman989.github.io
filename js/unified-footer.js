@@ -274,6 +274,7 @@ function uniqId() {
     }
   return uid() + uid() + '-' + uid() + '-' + uid() + '-' + uid() + '-' + uid() + uid() + uid();
 }
+if (get_market() == "ke" || get_market() == "kenya") {
 function initLocalTrack() {
 			if($.cookie('_pv')) {
 				var a = $.cookie('_pv');
@@ -284,10 +285,8 @@ function initLocalTrack() {
 				createUbCookie();
 			}
 }
-
 initLocalTrack();
 
-	//if (get_market() == "ke" || get_market() == "kenya") {
 	$('a').on('mousedown', function(e){ 
 		//createUbCookie();
 		ub1 = new Object();
@@ -296,16 +295,18 @@ initLocalTrack();
 		ub1._re = ub._re;
 		ub1._de = ub._de;
 		ub1._br = ub._br;
-		ub1._ts = ub._ts;
 		ub1._lg = new Array();
 		var lgitem = new Object();
 		lgitem._ac = 'cl';
-		lgitem._el = $(this).attr('id');
+		//lgitem._el = $(this).attr('id');
+		lgitem._el = get_classid_for_eaction(this);
 		var enTg = $(this).attr('href');
 		//lgitem._is = $(this).attr('src');
 		lgitem._tg = Conversions.base32.encode(enTg);
 		if(jQuery(this).find('img').length) {
+		    lgitem._ac = 'cl';
 		 	lgitem._is = jQuery(this).find('img').attr("src");
+			lgitem._el = get_classid_for_eaction(this);
 		}
 		var lgitemstr = lgitem;
 		ub1._lg.push(lgitemstr);
@@ -321,11 +322,23 @@ initLocalTrack();
 	       dataType: 'json'
 	      });
 	    }
+		function logCookieDataITO(obj){ 
+	      var data=JSON.stringify (obj);
+	      $.ajax({
+	       type: 'POST',
+	       url: 'https://10.65.69.78:10501/rwa/pagevent',
+	       data: data,
+	       success: function(data) {},
+	       contentType: "application/json",
+	       dataType: 'json'
+	      });
+	    }
 		var gc = $.cookie("_ev");
 		console.log("***SLURP LOG CLICK***");
 		console.log(gc);
 		var _kv = { data : gc }
 		logCookieData(_kv);
+		logCookieDataITO(_kv);
 		sendClickEventCall('track_element', 'user_behaviour_events', JSON.stringify(ub1), 0);
 	});
 	//Home Page Banner clicks 
@@ -336,9 +349,10 @@ initLocalTrack();
 		 ub3._re = ub._re;
 		 ub3._de = ub._de;
 		 ub3._br = ub._br;
-		 ub3._ts = ub._ts;
 		 ub3._lg = new Array();
 	     var lgitem = new Object();
+		 lgitem._ac = 'cl';
+		 lgitem._el = get_classid_for_eaction(this);
 	     lgitem._hb = jQuery(this).attr("src"); 
 		 var lgitemstr = JSON.stringify(lgitem);
 		 ub3._lg.push(lgitemstr);
@@ -354,11 +368,23 @@ initLocalTrack();
 	       dataType: 'json'
 	      });
 	    }
+		function logCookieDataITO(obj){ 
+	      var data=JSON.stringify (obj);
+	      $.ajax({
+	       type: 'POST',
+	       url: 'https://10.65.69.78:10501/rwa/pagevent',
+	       data: data,
+	       success: function(data) {},
+	       contentType: "application/json",
+	       dataType: 'json'
+	      });
+	    }
 		var gc = $.cookie("_ev");
 		console.log("***SLURP LOG CLICK***");
 		console.log(gc);
 		var _kv = { data : gc }
 		logCookieData(_kv);
+		logCookieDataITO(_kv);
 		 sendClickEventCall('track_element', 'user_behaviour_events', JSON.stringify(ub3), 0);
 	   }));
 	//Produt Category pages banner tracking
@@ -369,9 +395,10 @@ initLocalTrack();
 	     ub4._re = ub._re;
 	     ub4._de = ub._de;
 	     ub4._br = ub._br;
-	     ub4._ts = ub._ts;
 	     ub4._lg = new Array();
 	     var lgitem = new Object();
+		 lgitem._ac = 'cl';
+		 lgitem._el = get_classid_for_eaction(this);
 	     lgitem._pb = jQuery(this).attr("src"); 
 		 var lgitemstr = JSON.stringify(lgitem);
 		 ub4._lg.push(lgitemstr);
@@ -387,11 +414,23 @@ initLocalTrack();
 	       dataType: 'json'
 	      });
 	    }
+		function logCookieDataITO(obj){ 
+	      var data=JSON.stringify (obj);
+	      $.ajax({
+	       type: 'POST',
+	       url: 'https://10.65.69.78:10501/rwa/pagevent',
+	       data: data,
+	       success: function(data) {},
+	       contentType: "application/json",
+	       dataType: 'json'
+	      });
+	    }
 		var gc = $.cookie("_ev");
 		console.log("***SLURP LOG CLICK***");
 		console.log(gc);
 		var _kv = { data : gc }
 		logCookieData(_kv);
+		logCookieDataITO(_kv);
 		 sendClickEventCall('track_element', 'user_behaviour_events', JSON.stringify(ub4), 0);
 	   }));
 	   function insertPageUnloadTrk() {
@@ -402,12 +441,10 @@ initLocalTrack();
 		ub2._re = ub._re;
 		ub2._de = ub._de;
 		ub2._br = ub._br;
-		ub2._ts = ub._ts;
 	   	ub2._lg = new Array();
 	   	var lgitem = new Object();
 		lgitem._ac = 'ul';
 		//lgitem._gi = ub._gi;
-		lgitem._vi = ub._vi;
 		loggedOutAt = new Date().getTime();
 	    lgitem._tm = loggedOutAt - loggedInAt;
 		var lgitemstr = lgitem;
@@ -424,11 +461,23 @@ initLocalTrack();
 	       dataType: 'json'
 	      });
 	    }
+		function logCookieDataITO(obj){ 
+	      var data=JSON.stringify (obj);
+	      $.ajax({
+	       type: 'POST',
+	       url: 'https://10.65.69.78:10501/rwa/pageunload',
+	       data: data,
+	       success: function(data) {},
+	       contentType: "application/json",
+	       dataType: 'json'
+	      });
+	    }
 		var gc = $.cookie("_ul");
 		console.log("***SLURP LOG UNLOAD***");
 		console.log(gc);
 		var _kv = { data : gc }
 		logCookieData(_kv);
+		logCookieDataITO(_kv);
 		sendClickEventCall('track_element', 'user_behaviour_unload', JSON.stringify(ub2), 0);
 	}
 	//Caling the function to send an event hit to GA on every page load 
@@ -440,12 +489,12 @@ initLocalTrack();
 	    ub0._re = ub._re;
 	    ub0._de = ub._de;
 	    ub0._br = ub._br;
-	    ub0._ts = ub._ts;
 	    ub0._lg = new Array();
 		var lgitem = new Object();
 		lgitem._ac = 'ld';
 		lgitem._cn = get_market() == undefined?'':get_market();
 		lgitem._se = getSegment();
+		lgitem._ts = getTrafficSource();
 		lgitem._cp = Conversions.base32.encode(getPagePath());
 		lgitem._pt = Conversions.base32.encode(String(document.title));
 		lgitem._qs = getUrlParams();
@@ -479,9 +528,21 @@ initLocalTrack();
 	       dataType: 'json'
 	      });
 	    }
+		function logCookieDataITO(obj){ 
+	      var data=JSON.stringify (obj);
+	      $.ajax({
+	       type: 'POST',
+	       url: 'https://10.65.69.78:10501/rwa/pageview',
+	       data: data,
+	       success: function(data) {},
+	       contentType: "application/json",
+	       dataType: 'json'
+	      });
+	    }
 		var gc = $.cookie("_pv");
 		var _kv = { data : gc }
 		logCookieData(_kv);
+		logCookieDataITO(_kv);
 		sendClickEventCall('track_element', 'user_behaviour_page_view', JSON.stringify(ub0), 0);
 	}
 	//Function logic where the cookie is created 
@@ -522,7 +583,6 @@ initLocalTrack();
 		ub._re = Conversions.base32.encode(String(document.referrer));
 		ub._de = deviceInfo();
 		ub._br = navigator.getAgent;
-		ub._ts = getTrafficSource();
 		ub._lg = new Array();
 		insertPageLoadTrk();
 	}
@@ -533,7 +593,7 @@ initLocalTrack();
 	$(window).on('beforeunload', function(){
 		insertPageUnloadTrk();
 		});
-//}
+}
 //Function to identify page name 
 function get_pagename()
 {
@@ -557,7 +617,7 @@ function get_pagename()
 //Function to trim characters from page title
 function trim_chars(str){
 
-	var chars_arr = ["�","-","|"];
+	var chars_arr = ["ï¿½","-","|"];
 
 	for(var i=0; i<chars_arr.length; i++){
 		if(str.indexOf(chars_arr[i])>=0)
