@@ -31,7 +31,7 @@ gapi.analytics.ready(function() {
     query: {
       'dimensions': 'ga:eventAction','ga:pagePath',
       'metrics': 'ga:uniqueEvents',
-      'sort': 'ga:eventAction == firstchange','ga:pagePath=~^/(hk|tw|cn|sg|my|th|id|bn|ph|vn|in|bd|lk|np|ae|pk|bh|om|lb|qa|jo|ng|gh|ke|bw|botswana|tz|ug|zm|zw)/credit-cards/',
+      'filters': 'ga:eventAction == firstchange','ga:pagePath=~^/(hk|tw|cn|sg|my|th|id|bn|ph|vn|in|bd|lk|np|ae|pk|bh|om|lb|qa|jo|ng|gh|ke|bw|botswana|tz|ug|zm|zw)/credit-cards/',
     },
     chart: {
       type: 'TABLE',
