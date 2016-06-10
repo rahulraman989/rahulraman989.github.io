@@ -29,7 +29,7 @@ gapi.analytics.ready(function() {
   viewSelector.execute();
   var mainChart = new gapi.analytics.googleCharts.DataChart({
     query: {
-      'dimensions': 'Form Start',
+      'dimensions': 'ga:eventAction',
       'metrics': 'ga:uniqueEvents',
 	  'filters': 'ga:pagePath=~/credit-cards/;ga:eventCategory==timegap;ga:eventAction==firstchange'
     },
