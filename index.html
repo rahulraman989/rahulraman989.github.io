@@ -31,7 +31,6 @@ gapi.analytics.ready(function() {
     query: {
       'dimensions': 'ga:eventAction,ga:pagePath',
       'metrics': 'ga:uniqueEvents',
-      'filters': 'ga:eventAction%3D%3DfirstChange'
     },
     chart: {  
       type: 'TABLE',
@@ -76,7 +75,7 @@ gapi.analytics.ready(function() {
       var searchTerm =  dataTable.getValue(row, 0);
       var options = {
         query: {
-          filters: 'ga:searchKeyword==' + searchTerm
+          filters: 'ga:eventAction==' + searchTerm
         },
         chart: {
           options: {
