@@ -31,7 +31,7 @@ gapi.analytics.ready(function() {
     query: {
       'dimensions': 'ga:eventAction',
       'metrics': 'ga:uniqueEvents',
-	  'filters': 'ga:pagePath=~/credit-cards/'
+	  'filters': 'ga:pagePath=~/credit-cards/;ga:eventCategory==timegap'
     },
     chart: {  
       type: 'TABLE',
