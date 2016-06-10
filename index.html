@@ -33,10 +33,26 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:uniqueEvents',
 	  'filters': 'ga:pagePath=~/credit-cards/;ga:eventCategory==timegap;ga:eventAction==firstchange'
     },
+	
     chart: {  
       type: 'TABLE',
       container: 'main-chart-container',
-      options: {
+      options:  
+        width: '100%'
+      }
+    }
+  });
+  var mainChart_1 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'dimensions': 'ga:eventLabel',
+      'metrics': 'ga:uniqueEvents',
+	  'filters': 'ga:pagePath=~/credit-cards/;ga:eventCategory==next;ga:eventAction==success;ga:eventLabel=~review'
+    },
+	
+    chart: {  
+      type: 'TABLE',
+      container: 'main-chart-container',
+      options:  
         width: '100%'
       }
     }
@@ -63,6 +79,10 @@ gapi.analytics.ready(function() {
       google.visualization.events.removeListener(mainChartRowClickListener);
     }
     mainChart.set(options).execute();
+    breakdownChart.set(options);
+    if (breakdownChart.get().query.filters) breakdownChart.execute();
+	
+	mainChart_1.set(options).execute();
     breakdownChart.set(options);
     if (breakdownChart.get().query.filters) breakdownChart.execute();
   });
