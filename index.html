@@ -31,7 +31,7 @@ gapi.analytics.ready(function() {
     query: {
       'dimensions': 'ga:eventAction,ga:pagePath',
       'metrics': 'ga:uniqueEvents',
-      'filters': 'ga:eventAction == firstChange'
+      'filters': 'ga:eventAction%3D%3DfirstChange'
     },
     chart: {  
       type: 'TABLE',
