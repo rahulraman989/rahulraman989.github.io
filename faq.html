@@ -2,6 +2,8 @@
 <!-- Website template by freewebsitetemplates.com -->
 <html>
 <head>
+<script>
+	window.dataLayer = window.dataLayer || []; </script>
 	<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -17,8 +19,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56BGLLF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 	
+<!-- End Google Tag Manager (noscript) -->
+	<script> 
+		function gtm_doc() { 
+			window.dataLayer.push({
+				‘documentname’: ‘pjpdf’,
+				‘event’: ‘document_download’
+			});
+		}
+		</script>
 	<div id="header">
 		<div class="clearfix">
 			<div class="logo">
@@ -165,14 +175,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</div>
 	<script src="http://rahulraman989.github.io/js/unified-footer.js"></script>
 	<script src="http://rahulraman989.github.io/js/sc-tracking.js"></script>
-	<script> function gtm_doc()
-		{window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
- ‘documentname’: ‘pjpdf’,
- ‘event’: ‘document_download’
- });
-				   }
-		</script>
 	
 </body>
 </html>
